@@ -48,10 +48,12 @@ const Breeds = () => {
         if (data.length === selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(false);
+          setmarkSort(true);
         }
         if (data.length !== selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(true);
+          setmarkSort(true);
         }
       });
     }
@@ -60,6 +62,7 @@ const Breeds = () => {
         if (data.length === selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(false);
+          setmarkSort(true);
         }
         if (data.length !== selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
@@ -73,6 +76,7 @@ const Breeds = () => {
       Promise.all([arr1, arr2]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setmarkSort(true);
       });
     }
 
@@ -82,6 +86,7 @@ const Breeds = () => {
       Promise.all([arr1, arr2]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setmarkSort(true);
       });
     }
     if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === false) {
@@ -91,6 +96,7 @@ const Breeds = () => {
       Promise.all([arr1, arr2, arr3]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setmarkSort(true);
       });
     }
     if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === true) {
@@ -101,6 +107,7 @@ const Breeds = () => {
       Promise.all([arr1, arr2, arr3, arr4]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setmarkSort(true);
       });
     }
     if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === false) {
@@ -111,6 +118,7 @@ const Breeds = () => {
       Promise.all([arr1, arr2, arr3, arr4]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setmarkSort(true);
       });
     }
     if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === true) {
@@ -121,6 +129,7 @@ const Breeds = () => {
       Promise.all([arr1, arr2, arr3, arr4]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setmarkSort(true);
       });
     }
     if (selectedOption !== null) {
