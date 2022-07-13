@@ -1,0 +1,11 @@
+.mainWrapper {
+  padding-top: 30px;
+  padding-left: 133px;
+  padding-right: 30px;
+  padding-bottom: 18px;
+}
+.wrapper {
+  display: flex;
+  background: #e5e5e5;
+  justify-content: space-between;
+}

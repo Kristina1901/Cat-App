@@ -1,11 +1,10 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-const HomePage = lazy(() =>
-  import('./HomePage' /* webpackChunkName: "home-page" */)
-);
-const Voting = lazy(() => import('./Voting' /* webpackChunkName: "cast" */));
-const Breeds = lazy(() => import('./Breeds' /* webpackChunkName: "cast" */));
+const HomePage = lazy(() => import('./HomePage'));
+const Voting = lazy(() => import('./Voting'));
+const Breeds = lazy(() => import('./Breeds'));
+const BreedsDetails = lazy(() => import('./BreedsDetails'));
 
 export const App = () => {
   return (
@@ -16,6 +15,7 @@ export const App = () => {
 
           <Route path="/voting" element={<Voting />} />
           <Route path="/breeds" element={<Breeds />} />
+          <Route path="/breeds/breedsDetails/:id" element={<BreedsDetails />} />
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

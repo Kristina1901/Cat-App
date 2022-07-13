@@ -197,30 +197,48 @@ const Breeds = () => {
   if (selectedBreedsArray.length === 0 && markSort === true) {
     renderList = listBreedsDefaultClean.map(({ id, image, name }) => (
       <li key={id} className={s.gridContainerItem}>
-        <div className={s.modalName}>
-          <div className={s.modalNameBreed}>{name}</div>
-        </div>
-        <img src={image.url} alt="cat" className={s.gridContainerImg} />
+        <Link
+          to={`./breedsDetails/${id}`}
+          state={{ from: location }}
+          className={s.link}
+        >
+          <div className={s.modalName}>
+            <div className={s.modalNameBreed}>{name}</div>
+          </div>
+          <img src={image.url} alt="cat" className={s.gridContainerImg} />
+        </Link>
       </li>
     ));
   }
   if (selectedBreedsArray.length === 0 && markSort !== true) {
     renderList = downList.map(({ id, image, name }) => (
       <li key={id} className={s.gridContainerItem}>
-        <div className={s.modalName}>
-          <div className={s.modalNameBreed}>{name}</div>
-        </div>
-        <img src={image.url} alt="cat" className={s.gridContainerImg} />
+        <Link
+          to={`./breedsDetails/${id}`}
+          state={{ from: location }}
+          className={s.link}
+        >
+          <div className={s.modalName}>
+            <div className={s.modalNameBreed}>{name}</div>
+          </div>
+          <img src={image.url} alt="cat" className={s.gridContainerImg} />
+        </Link>
       </li>
     ));
   }
   if (selectedBreedsArray.length !== 0) {
     renderList = selectedBreedsArray.map(({ id, image, name }) => (
       <li key={id} className={s.gridContainerItem}>
-        <div className={s.modalName}>
-          <div className={s.modalNameBreed}>{name}</div>
-        </div>
-        <img src={image.url} alt="cat" className={s.gridContainerImg} />
+        <Link
+          to={`./breedsDetails/${id}`}
+          state={{ from: location }}
+          className={s.link}
+        >
+          <div className={s.modalName}>
+            <div className={s.modalNameBreed}>{name}</div>
+          </div>
+          <img src={image.url} alt="cat" className={s.gridContainerImg} />
+        </Link>
       </li>
     ));
   }
