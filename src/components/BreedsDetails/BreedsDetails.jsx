@@ -11,8 +11,6 @@ import styles from '../Logo/Logo.module.css';
 // import { getCatsBreedsbyName } from '../../services/cats-api';
 import { getCatsBreedsImage } from '../../services/cats-api';
 const BreedsDetails = () => {
-  const [cat, setCat] = useState([]);
-  const [items, setItems] = useState([]);
   const [breed, setBreed] = useState([]);
   const [page, setPage] = useState(0);
   const [img, setImg] = useState('');
