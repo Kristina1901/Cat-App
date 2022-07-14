@@ -147,6 +147,9 @@ ul {
   margin-right: 5px;
   padding: 0;
 }
+.activeLink:last-child {
+  margin-right: 0px;
+}
 .infoBreed {
   border: 2px solid #fbe0dc;
   border-radius: 20px;
