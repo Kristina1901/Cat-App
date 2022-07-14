@@ -9,3 +9,141 @@
   background: #e5e5e5;
   justify-content: space-between;
 }
+.linkActive {
+  background: #ff868e;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #ffffff;
+  padding-right: 30px;
+  padding-left: 30px;
+  text-transform: uppercase;
+}
+.sectionVoting {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 20px;
+}
+.navlink {
+  display: flex;
+}
+.back {
+  background: #fbe0dc;
+  border-radius: 10px;
+  border: none;
+  padding-top: 10px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-bottom: 10px;
+  margin-right: 10px;
+}
+.thumbImg {
+  position: relative;
+}
+.backArrow {
+  background-image: url('./img/arrow.svg');
+  width: 12px;
+  height: 20px;
+}
+.back:hover {
+  background: #ff868e;
+}
+.back:hover .backArrow {
+  background-image: url('./img/white_arrow.svg');
+}
+.linkActive {
+  background: #fbe0dc;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #ff868e;
+  padding-right: 30px;
+  padding-left: 30px;
+  text-transform: uppercase;
+}
+.navlink {
+  display: flex;
+}
+.catPhoto {
+  border-radius: 20px;
+  margin-top: 20px;
+  width: 100%;
+  object-fit: cover;
+}
+.linkActiveId {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  background: #ff868e;
+  border-radius: 10px;
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin-left: 10px;
+}
+.catPhoto {
+  border-radius: 20px;
+  margin-top: 20px;
+  width: 100%;
+  object-fit: cover;
+}
+ul {
+  list-style: none;
+}
+.thumbImg {
+  position: relative;
+}
+.listButton {
+  display: flex;
+  position: absolute;
+  left: 42%;
+  bottom: 0px;
+  border: 6px solid white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 0;
+  margin: 0;
+  background: white;
+  padding: 4px 4px 4px 4px;
+}
+.buttonSwitcher {
+  height: 10px;
+  width: 10px;
+  background: #fbe0dc;
+  border-radius: 10px;
+  border: none;
+  margin-right: 5px;
+  padding: 0;
+}
+.buttonSwitcher:last-child {
+  margin-right: 0px;
+}
+.activeLink {
+  height: 10px;
+  width: 10px;
+  background: #ff868e;
+  border-radius: 10px;
+  border: none;
+  margin-right: 5px;
+  padding: 0;
+}
