@@ -35,16 +35,29 @@ export async function getCatsBreedsImg(limit, page) {
 
   return data;
 }
-// export async function getCatsBreedsbyName(query) {
-//   const { data } = await axios.get(
-//     `https://api.thecatapi.com/v1/breeds/search?q=${query}`,
-//     {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'x-api-key': '17d94b92-754f-46eb-99a0-65be65b5d18f',
-//       },
-//     }
-//   );
+export async function getCatsBreedsbyName(query) {
+  const { data } = await axios.get(
+    `https://api.thecatapi.com/v1/breeds/search?q=${query}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': '17d94b92-754f-46eb-99a0-65be65b5d18f',
+      },
+    }
+  );
 
-//   return data;
-// }
+  return data;
+}
+export async function getCatsBreedsImage(id, page) {
+  const { data } = await axios.get(
+    `https://api.thecatapi.com/v1/images/search?breed_id=${id}&page=${page}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': '17d94b92-754f-46eb-99a0-65be65b5d18f',
+      },
+    }
+  );
+
+  return data;
+}
