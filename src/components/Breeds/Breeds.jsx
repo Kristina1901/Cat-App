@@ -3,7 +3,7 @@ import { getCatsBreedsImg } from '../../services/cats-api';
 import { useState, useEffect } from 'react';
 import customStylesGrids from '../../select/selectStylesGrids';
 import Logo from 'components/Logo/Logo';
-import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from '../Logo/Logo.module.css';
 import { nanoid } from 'nanoid';
 import vote from '../Logo/img/vote.png';
@@ -13,7 +13,7 @@ import s from './Breeds.module.css';
 import Form from 'components/Form/Form';
 import Select from 'react-select';
 import selectStyles from '../../select/selectStyles';
-import cat_default from './img/cat_default.jpg';
+
 const options = [
   { value: 5, label: 'Limit: 5' },
   { value: 10, label: 'Limit: 10' },
