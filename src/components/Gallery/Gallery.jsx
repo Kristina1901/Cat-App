@@ -9,7 +9,7 @@ import { nanoid } from 'nanoid';
 import vote from '../Logo/img/vote.png';
 import breeds from '../Logo/img/breeds.png';
 import gallery from '../Logo/img/gallery.png';
-import s from './Breeds.module.css';
+import s from './Gallery.module.css';
 import Form from 'components/Form/Form';
 import Select from 'react-select';
 import selectStyles from '../../select/selectStyles';
@@ -20,7 +20,7 @@ const options = [
   { value: 15, label: 'Limit: 15' },
   { value: 20, label: 'Limit: 20' },
 ];
-const Breeds = () => {
+const Gallery = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [listBreeds, setListBreeds] = useState([]);
   const [listBreedsDefaultClean, setListBreedsDefaultClean] = useState([]);
@@ -267,9 +267,9 @@ const Breeds = () => {
                     <img src={breeds} alt="breeds" width="117px" />
                   </div>
                   <Link
-                    to={'#'}
+                    to={'../breeds'}
                     state={{ from: location }}
-                    className={styles.linkActive}
+                    className={styles.link}
                   >
                     Breeds
                   </Link>
@@ -279,9 +279,9 @@ const Breeds = () => {
                     <img src={gallery} alt="gallery" width="112px" />
                   </div>
                   <Link
-                    to={'../gallery'}
+                    to={'#'}
                     state={{ from: location }}
-                    className={styles.link}
+                    className={styles.linkActive}
                   >
                     Gallery
                   </Link>
@@ -296,9 +296,9 @@ const Breeds = () => {
                 <button className={s.back} onClick={onGoBack}>
                   <div className={s.backArrow}></div>
                 </button>
-                <div className={s.linkActive}>Breeds</div>
+                <div className={s.linkActive}>Gallery</div>
 
-                <Select
+                {/* <Select
                   options={getBreedsName()}
                   loadOptions={getBreedsName}
                   defaultValue={selectedOption}
@@ -313,13 +313,13 @@ const Breeds = () => {
                   styles={customStylesGrids}
                   onChange={({ value }) => setSelectedBreedsQuantity(value)}
                   placeholder="Limit: 5"
-                />
-                <button className={s.sortingDown} onClick={filteredByAZ}>
+                /> */}
+                {/* <button className={s.sortingDown} onClick={filteredByAZ}>
                   <div className={s.sortingDownImg}></div>
                 </button>
                 <button className={s.sortingUp} onClick={filteredByZA}>
                   <div className={s.sortingUpImg}></div>
-                </button>
+                </button> */}
               </div>
               <div className={s.gridContainerWidth}>
                 <ul style={divStyle}>{renderList}</ul>
@@ -352,4 +352,4 @@ const Breeds = () => {
   );
 };
 
-export default Breeds;
+export default Gallery;

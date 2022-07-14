@@ -108,7 +108,7 @@ const Voting = () => {
                   <img src={gallery} alt="gallery" width="112px" />
                 </div>
                 <Link
-                  to={''}
+                  to={'../gallery'}
                   state={{ from: location }}
                   className={styles.link}
                 >
@@ -125,7 +125,7 @@ const Voting = () => {
               <button className={s.back} onClick={onGoBack}>
                 <div className={s.backArrow}></div>
               </button>
-              <div className={s.linkActive}> Voting</div>
+              <div className={s.linkActive}>Voting</div>
             </div>
             <div className={s.thumbImg}>
               <img

@@ -5,6 +5,7 @@ const HomePage = lazy(() => import('./HomePage'));
 const Voting = lazy(() => import('./Voting'));
 const Breeds = lazy(() => import('./Breeds'));
 const BreedsDetails = lazy(() => import('./BreedsDetails'));
+const Gallery = lazy(() => import('./Gallery'));
 
 export const App = () => {
   return (
@@ -16,7 +17,7 @@ export const App = () => {
           <Route path="/voting" element={<Voting />} />
           <Route path="/breeds" element={<Breeds />} />
           <Route path="/breeds/breedsDetails/:id" element={<BreedsDetails />} />
-
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>

@@ -77,7 +77,7 @@ const BreedsDetails = () => {
                   <img src={gallery} alt="gallery" width="112px" />
                 </div>
                 <Link
-                  to={''}
+                  to={'../gallery'}
                   state={{ from: location }}
                   className={styles.link}
                 >
