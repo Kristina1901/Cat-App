@@ -14,7 +14,7 @@ const BreedsDetails = () => {
   const [breed, setBreed] = useState([]);
   const [page, setPage] = useState(0);
   const [img, setImg] = useState('');
-  const [activeLink, setActiveLink] = useState(false);
+  const [activeId, setActiveId] = useState(0);
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -89,7 +89,7 @@ const BreedsDetails = () => {
         </header>
         <div className={s.commonMark}>
           <Form />
-          <div className={s.sectionVoting}>
+          <div className={s.sectionDetails}>
             <div className={s.navlink}>
               <button className={s.back} onClick={onGoBack}>
                 <div className={s.backArrow}></div>
@@ -108,30 +108,68 @@ const BreedsDetails = () => {
               />
               <div className={s.listButton}>
                 <button
-                  className={s.buttonSwitcher}
-                  onClick={() => setPage(0)}
-                ></button>
-                <button
-                  className={s.buttonSwitcher}
-                  onClick={() => setPage(1)}
-                ></button>
-                <button
-                  className={s.buttonSwitcher}
+                  className={activeId === 0 ? s.activeLink : s.buttonSwitcher}
                   onClick={() => {
-                    setPage(2);
+                    setPage(0);
+                    setActiveId(0);
                   }}
                 ></button>
                 <button
-                  className={s.buttonSwitcher}
-                  onClick={() => setPage(3)}
+                  className={activeId === 1 ? s.activeLink : s.buttonSwitcher}
+                  onClick={() => {
+                    setPage(1);
+                    setActiveId(1);
+                  }}
                 ></button>
                 <button
-                  className={s.buttonSwitcher}
+                  className={activeId === 2 ? s.activeLink : s.buttonSwitcher}
+                  onClick={() => {
+                    setPage(2);
+                    setActiveId(2);
+                  }}
+                ></button>
+                <button
+                  className={activeId === 3 ? s.activeLink : s.buttonSwitcher}
+                  onClick={() => {
+                    setPage(3);
+                    setActiveId(3);
+                  }}
+                ></button>
+                <button
+                  className={activeId === 4 ? s.activeLink : s.buttonSwitcher}
                   onClick={() => {
                     setPage(4);
+                    setActiveId(4);
                   }}
                 ></button>
               </div>
+            </div>
+            <div className={s.infoBreed}>
+              <p className={s.infoBreedFamily}>Family companion cat</p>
+
+              {breed.map(({ temperament, id, origin, weight, life_span }) => (
+                <div key={id} className={s.containerInfo}>
+                  <p className={s.temperament}>
+                    <span className={s.temperamentTitle}>Temperament:</span>{' '}
+                    {temperament}
+                  </p>
+                  <div className={s.characteristics}>
+                    <p className={s.characteristicsItem}>
+                      <span className={s.characteristicsTitle}>Origin:</span>{' '}
+                      {origin}
+                    </p>
+                    <p className={s.characteristicsItem}>
+                      <span className={s.characteristicsTitle}>Weight:</span>{' '}
+                      {weight.metric}
+                    </p>
+                    <p className={s.characteristicsItem}>
+                      <span className={s.characteristicsTitle}>Life span:</span>{' '}
+                      {life_span}
+                    </p>
+                  </div>
+                </div>
+              ))}
+              <div className={s.infoBreedId}>{id}</div>
             </div>
           </div>
         </div>
