@@ -1,7 +1,6 @@
 import { getCatsBreeds } from '../../services/cats-api';
 import { getCatsBreedsImg } from '../../services/cats-api';
 import { useState, useEffect } from 'react';
-import customStylesGrids from '../../select/selectStylesGrids';
 import Logo from 'components/Logo/Logo';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from '../Logo/Logo.module.css';
@@ -12,13 +11,26 @@ import gallery from '../Logo/img/gallery.png';
 import s from './Gallery.module.css';
 import Form from 'components/Form/Form';
 import Select from 'react-select';
-import selectStyles from '../../select/selectStyles';
+import selectStylesGallery from '../../select/selectStylesGallery';
+import customStylesGridsGallery from '../../select/selectStylesGridsGallery';
+import selectGalleryImg from '../../select/selectStylesGalleryImg';
+import selectGalleryImglimit from '../../select/selectStylesGridsGalleryLimit';
 
-const options = [
-  { value: 5, label: 'Limit: 5' },
-  { value: 10, label: 'Limit: 10' },
-  { value: 15, label: 'Limit: 15' },
-  { value: 20, label: 'Limit: 20' },
+const optionsImg = [
+  { value: 'All', label: 'All' },
+  { value: 'Static', label: 'Static' },
+  { value: 'Animated', label: 'Animated' },
+];
+const optionsOrder = [
+  { value: 'Random', label: 'Random' },
+  { value: 'Desc', label: 'Desc' },
+  { value: 'Asc', label: 'Asc' },
+];
+const optionsLimit = [
+  { value: 5, label: '5 items per page' },
+  { value: 10, label: '10 items per page' },
+  { value: 15, label: '15 items per page' },
+  { value: 20, label: '20 items per page' },
 ];
 const Gallery = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -296,30 +308,57 @@ const Gallery = () => {
                 <button className={s.back} onClick={onGoBack}>
                   <div className={s.backArrow}></div>
                 </button>
-                <div className={s.linkActive}>Gallery</div>
+                <div className={s.linkActiveContainer}>
+                  <div className={s.linkActive}>Gallery</div>
+                </div>
+                <button className={s.upload}>Upload</button>
+              </div>
 
-                {/* <Select
-                  options={getBreedsName()}
-                  loadOptions={getBreedsName}
-                  defaultValue={selectedOption}
-                  styles={selectStyles}
-                  onChange={({ value }) => setSelectedOption(value)}
-                  placeholder="All breeds"
-                />
-                <Select
-                  options={options}
-                  loadOptions={getBreedsName}
-                  defaultValue={selectedOption}
-                  styles={customStylesGrids}
-                  onChange={({ value }) => setSelectedBreedsQuantity(value)}
-                  placeholder="Limit: 5"
-                /> */}
-                {/* <button className={s.sortingDown} onClick={filteredByAZ}>
-                  <div className={s.sortingDownImg}></div>
-                </button>
-                <button className={s.sortingUp} onClick={filteredByZA}>
-                  <div className={s.sortingUpImg}></div>
-                </button> */}
+              <div className={s.containerSelect}>
+                <div className={s.selectOrder}>
+                  <div className={s.labelSelect}>
+                    <span className={s.label}>Order</span>
+                    <Select
+                      options={optionsOrder}
+                      defaultValue={selectedOption}
+                      styles={selectStylesGallery}
+                      onChange={({ value }) => setSelectedOption(value)}
+                      placeholder="Random"
+                    />
+                  </div>
+                  <div className={s.labelSelect}>
+                    <span className={s.label}>Type</span>
+                    <Select
+                      options={optionsImg}
+                      defaultValue={selectedOption}
+                      styles={customStylesGridsGallery}
+                      onChange={({ value }) => setSelectedBreedsQuantity(value)}
+                      placeholder="Static"
+                    />
+                  </div>
+                </div>
+                <div className={s.selectOrder}>
+                  <div>
+                    <span className={s.label}>Breed</span>
+                    <Select
+                      options={getBreedsName()}
+                      defaultValue={selectedOption}
+                      styles={selectGalleryImg}
+                      onChange={({ value }) => setSelectedOption(value)}
+                      placeholder="None"
+                    />
+                  </div>
+                  <div>
+                    <span className={s.label}>Limit</span>
+                    <Select
+                      options={optionsLimit}
+                      defaultValue={selectedOption}
+                      styles={selectGalleryImglimit}
+                      onChange={({ value }) => setSelectedBreedsQuantity(value)}
+                      placeholder="All"
+                    />
+                  </div>
+                </div>
               </div>
               <div className={s.gridContainerWidth}>
                 <ul style={divStyle}>{renderList}</ul>
