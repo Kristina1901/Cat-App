@@ -536,6 +536,8 @@
 }
 .selectOrder {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 .containerSelectLabel {
   display: flex;
@@ -544,4 +546,24 @@
 .labelSelect {
   display: flex;
   flex-direction: column;
+}
+.arrowUpload {
+  width: 40px;
+  height: 40px;
+  background-image: url('./img/Upgrade.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+.arrowUpload:hover {
+  width: 40px;
+  height: 40px;
+  background-image: url('./img/upgrade_white.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: #ff868e;
+  border-radius: 10px;
 }

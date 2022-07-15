@@ -11,10 +11,10 @@ import gallery from '../Logo/img/gallery.png';
 import s from './Gallery.module.css';
 import Form from 'components/Form/Form';
 import Select from 'react-select';
-import selectStylesGallery from '../../select/selectStylesGallery';
-import customStylesGridsGallery from '../../select/selectStylesGridsGallery';
-import selectGalleryImg from '../../select/selectStylesGalleryImg';
-import selectGalleryImglimit from '../../select/selectStylesGridsGalleryLimit';
+import order from '../../select/order';
+import typeimg from '../../select/typeimg';
+import breedslist from '../../select/breedslist';
+import limit from '../../select/limit';
 
 const optionsImg = [
   { value: 'All', label: 'All' },
@@ -321,7 +321,7 @@ const Gallery = () => {
                     <Select
                       options={optionsOrder}
                       defaultValue={selectedOption}
-                      styles={selectStylesGallery}
+                      styles={order}
                       onChange={({ value }) => setSelectedOption(value)}
                       placeholder="Random"
                     />
@@ -331,7 +331,7 @@ const Gallery = () => {
                     <Select
                       options={optionsImg}
                       defaultValue={selectedOption}
-                      styles={customStylesGridsGallery}
+                      styles={typeimg}
                       onChange={({ value }) => setSelectedBreedsQuantity(value)}
                       placeholder="Static"
                     />
@@ -343,7 +343,7 @@ const Gallery = () => {
                     <Select
                       options={getBreedsName()}
                       defaultValue={selectedOption}
-                      styles={selectGalleryImg}
+                      styles={breedslist}
                       onChange={({ value }) => setSelectedOption(value)}
                       placeholder="None"
                     />
@@ -353,11 +353,12 @@ const Gallery = () => {
                     <Select
                       options={optionsLimit}
                       defaultValue={selectedOption}
-                      styles={selectGalleryImglimit}
+                      styles={limit}
                       onChange={({ value }) => setSelectedBreedsQuantity(value)}
                       placeholder="All"
                     />
                   </div>
+                  <button className={s.arrowUpload}></button>
                 </div>
               </div>
               <div className={s.gridContainerWidth}>

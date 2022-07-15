@@ -1,4 +1,4 @@
-const customStyles = {
+const Order = {
   placeholder: () => ({
     fontFamily: 'Jost',
     fontStyle: 'normal',
@@ -16,16 +16,18 @@ const customStyles = {
     fontSize: '16px',
     lineHeight: '24px',
     color: '#8c8c8c',
-    height: '40px',
+    height: '36px',
     position: 'relative',
     background: '#FFFFFF',
     borderRadius: '10px',
     paddingLeft: '10px',
-    width: '200px',
+    width: '196px',
     paddingRight: '80px',
-    border: 'none',
-    zIndex: '12',
-    marginRight: '20px',
+    zIndex: '9',
+    border: '2px solid #FFFFFF',
+    '&:hover': {
+      border: '2px solid #FBE0DC',
+    },
   }),
   dropdownIndicator: () => ({
     position: 'absolute',
@@ -41,6 +43,7 @@ const customStyles = {
     fontSize: '16px',
     lineHeight: '24px',
     color: '#8C8C8C',
+    marginBottom: '10px',
   }),
   input: () => ({
     display: 'none',
@@ -53,9 +56,9 @@ const customStyles = {
     borderRadius: '30px',
     paddingTop: '20px',
     paddingLeft: '20px',
-    marginBottom: '20px',
     paddingBottom: '18px',
-    zIndex: '5',
+    zIndex: '1',
+    width: '280px',
   }),
   singleValue: () => ({
     fontFamily: 'Jost',
@@ -67,6 +70,9 @@ const customStyles = {
     position: 'relative',
     top: '25%',
   }),
+  menuList: () => ({
+    marginBottom: '-10px',
+  }),
 };
 
-export default customStyles;
+export default Order;

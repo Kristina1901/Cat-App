@@ -1,4 +1,4 @@
-const customStylesGrids = {
+const typeimg = {
   placeholder: () => ({
     fontFamily: 'Jost',
     fontStyle: 'normal',
@@ -16,15 +16,18 @@ const customStylesGrids = {
     fontSize: '16px',
     lineHeight: '24px',
     color: '#8c8c8c',
-    height: '40px',
+    height: '36px',
     position: 'relative',
     background: '#FFFFFF',
     borderRadius: '10px',
     paddingLeft: '10px',
-    width: '200px',
+    width: '196px',
     paddingRight: '80px',
-    border: 'none',
     zIndex: '12',
+    border: '2px solid #FFFFFF',
+    '&:hover': {
+      border: '2px solid #FBE0DC',
+    },
   }),
   dropdownIndicator: () => ({
     position: 'absolute',
@@ -40,6 +43,7 @@ const customStylesGrids = {
     fontSize: '16px',
     lineHeight: '24px',
     color: '#8C8C8C',
+    marginBottom: '10px',
   }),
   input: () => ({
     display: 'none',
@@ -53,14 +57,14 @@ const customStylesGrids = {
     paddingTop: '20px',
     paddingLeft: '20px',
     marginTop: '5px',
-    width: '300px',
+    width: '280px',
     paddingBottom: '18px',
     position: 'absolute',
     zIndex: '5',
     left: 0,
   }),
   menuList: () => ({
-    paddingRight: '219px',
+    marginBottom: '-10px',
   }),
   singleValue: () => ({
     fontFamily: 'Jost',
@@ -75,4 +79,4 @@ const customStylesGrids = {
   }),
 };
 
-export default customStylesGrids;
+export default typeimg;

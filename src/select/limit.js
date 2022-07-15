@@ -1,4 +1,4 @@
-const customStylesGrids = {
+const limit = {
   placeholder: () => ({
     fontFamily: 'Jost',
     fontStyle: 'normal',
@@ -16,15 +16,19 @@ const customStylesGrids = {
     fontSize: '16px',
     lineHeight: '24px',
     color: '#8c8c8c',
-    height: '40px',
+    height: '36px',
     position: 'relative',
     background: '#FFFFFF',
     borderRadius: '10px',
     paddingLeft: '10px',
-    width: '200px',
+    width: '146px',
     paddingRight: '80px',
-    border: 'none',
     zIndex: '10',
+    border: '2px solid #FFFFFF',
+
+    '&:hover': {
+      border: '2px solid #FBE0DC',
+    },
   }),
   dropdownIndicator: () => ({
     position: 'absolute',
@@ -77,4 +81,4 @@ const customStylesGrids = {
   }),
 };
 
-export default customStylesGrids;
+export default limit;
