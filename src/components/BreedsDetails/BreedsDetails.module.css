@@ -83,6 +83,7 @@
   margin-top: 20px;
   width: 100%;
   object-fit: cover;
+  object-position: top center;
 }
 .linkActiveId {
   padding-top: 5px;
@@ -178,6 +179,7 @@ ul {
   line-height: 23px;
   color: #8c8c8c;
   margin: 0;
+  margin-right: 20px;
 }
 .infoBreedFamily {
   margin: 0;
