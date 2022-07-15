@@ -1,11 +1,11 @@
-const customStyles = {
+const customStylesGrids = {
   placeholder: () => ({
     fontFamily: 'Jost',
     fontStyle: 'normal',
     fontWeight: '400',
     fontSize: '16px',
     lineHeight: '24px',
-    color: '#8c8c8c',
+    color: '#1D1D1D',
     position: 'relative',
     top: '25%',
   }),
@@ -18,14 +18,13 @@ const customStyles = {
     color: '#8c8c8c',
     height: '40px',
     position: 'relative',
-    marginLeft: '10px',
-    background: '#f8f8f7',
+    background: '#FFFFFF',
     borderRadius: '10px',
     paddingLeft: '10px',
     width: '200px',
-    paddingRight: '16px',
+    paddingRight: '80px',
     border: 'none',
-    zIndex: '9',
+    zIndex: '10',
   }),
   dropdownIndicator: () => ({
     position: 'absolute',
@@ -41,6 +40,7 @@ const customStyles = {
     fontSize: '16px',
     lineHeight: '24px',
     color: '#8C8C8C',
+    width: '130px',
     marginBottom: '10px',
   }),
   input: () => ({
@@ -54,16 +54,15 @@ const customStyles = {
     borderRadius: '30px',
     paddingTop: '20px',
     paddingLeft: '20px',
-    paddingRight: '20px',
+    marginTop: '5px',
+    width: '280px',
     paddingBottom: '18px',
-    zIndex: '1',
-    marginBottom: '-10px',
-    width: '260px',
+    position: 'absolute',
+    zIndex: '3',
+    left: 0,
   }),
   menuList: () => ({
-    overflowY: 'auto',
-    position: 'relative',
-    height: '262px',
+    marginBottom: '-10px',
   }),
   singleValue: () => ({
     fontFamily: 'Jost',
@@ -71,10 +70,11 @@ const customStyles = {
     fontWeight: '400',
     fontSize: '16px',
     lineHeight: '24px',
-    color: '#8c8c8c',
+    color: '#1D1D1D',
     position: 'relative',
     top: '25%',
+    right: '-10%',
   }),
 };
 
-export default customStyles;
+export default customStylesGrids;

@@ -39,6 +39,7 @@ const customStylesGrids = {
     fontSize: '16px',
     lineHeight: '24px',
     color: '#8C8C8C',
+    marginTop: '10px',
   }),
   input: () => ({
     display: 'none',
@@ -52,14 +53,16 @@ const customStylesGrids = {
     paddingTop: '20px',
     paddingLeft: '20px',
     marginTop: '5px',
-    width: '300px',
+    width: '280px',
     paddingBottom: '18px',
     position: 'absolute',
     right: '-50%',
     zIndex: '3',
+    marginBotton: '-10px',
   }),
   menuList: () => ({
     paddingRight: '219px',
+    marginTop: '-10px',
   }),
   singleValue: () => ({
     fontFamily: 'Jost',
