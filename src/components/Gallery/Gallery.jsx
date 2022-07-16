@@ -88,13 +88,7 @@ const Gallery = () => {
       selectedBreedsQuantity === 5 &&
       (!typeImg || !breedId || !orderValue || !page)
     ) {
-      getCatsGallery(
-        selectedBreedsQuantity,
-        typeImg,
-        orderValue,
-        page,
-        breedId
-      ).then(data => {
+      getCatsGallery(5, typeImg, orderValue, page, breedId).then(data => {
         if (data.length === selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(false);
