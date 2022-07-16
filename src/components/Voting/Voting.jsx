@@ -14,18 +14,18 @@ import gallery from '../Logo/img/gallery.png';
 import Form from 'components/Form/Form';
 import styles from '../Logo/Logo.module.css';
 const Voting = () => {
-  const [cat, setCat] = useState([]);
+  const [cat, setCat] = useState('');
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    if (cat.length === 0) {
+    if (cat === '') {
       getCatsVote().then(data => setCat(data));
     }
-    if (cat.length !== 0) {
-      setCat([]);
-      getCatsVote().then(data => setCat(data));
-    }
-  }, []);
+    // if (cat.length === 0) {
+    //   setCat([]);
+    //   getCatsVote().then(data => setCat(data));
+    // }
+  }, [cat]);
 
   const onGoBack = () => {
     navigate(location?.state?.from ?? '/');
