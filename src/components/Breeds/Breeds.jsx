@@ -103,8 +103,7 @@ const Breeds = () => {
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
       let arr3 = getCatsBreedsImg(5, 2);
-      let arr4 = getCatsBreedsImg(5, 3);
-      Promise.all([arr1, arr2, arr3, arr4]).then(data => {
+      Promise.all([arr1, arr2, arr3]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
         setmarkSort(true);
@@ -142,8 +141,7 @@ const Breeds = () => {
   };
   function getBreedsName() {
     let array = listBreeds.map(item => item.name);
-    let newArray = array.filter((item, index) => array.indexOf(item) === index);
-    let options = newArray.map(item => {
+    let options = array.map(item => {
       return { label: item, value: item };
     });
     return options;
