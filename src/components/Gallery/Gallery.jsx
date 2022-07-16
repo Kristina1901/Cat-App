@@ -1,6 +1,6 @@
-import { getCatsBreeds } from '../../services/cats-api';
-import { getCatsBreedsImg } from '../../services/cats-api';
 import { useState, useEffect } from 'react';
+import { getCatsGallery } from '../../services/cats-api';
+import { getCatsBreeds } from '../../services/cats-api';
 import Logo from 'components/Logo/Logo';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from '../Logo/Logo.module.css';
@@ -33,48 +33,50 @@ const optionsLimit = [
   { value: 20, label: '20 items per page' },
 ];
 const Gallery = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [orderValue, setOrderValue] = useState('Random');
+  const [typeImg, setTypeImg] = useState('');
+  const [breedId, setBreedId] = useState('');
   const [listBreeds, setListBreeds] = useState([]);
   const [listBreedsDefaultClean, setListBreedsDefaultClean] = useState([]);
   const [selectedBreedsQuantity, setSelectedBreedsQuantity] = useState(5);
   const [conditionButton, setConditionButton] = useState(false);
   const [deletedPage, setDeletedPage] = useState(false);
-  const [selectedBreedsArray, setselectedBreedsArray] = useState([]);
+  // const [selectedBreedsArray, setselectedBreedsArray] = useState([]);
   const [page, setPage] = useState(0);
-  const [markSort, setmarkSort] = useState(true);
-  const [downList, setdownList] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
-    if (page === 0 && selectedBreedsQuantity === 5) {
+    if (
+      page === 0 &&
+      selectedBreedsQuantity === 5 &&
+      typeImg === '' &&
+      breedId === '' &&
+      orderValue === 'Random'
+    ) {
       getCatsBreeds().then(data => setListBreeds(data));
-      getCatsBreedsImg(5, 0)
+
+      getCatsGallery(5, '', orderValue, page, breedId)
         .then(data => getFlatArray(data))
         .then(data => {
           setListBreedsDefaultClean(data);
         });
       setConditionButton(false);
     }
-    if (selectedBreedsQuantity !== 5 && page !== 0) {
-      getCatsBreedsImg(selectedBreedsQuantity, page).then(data => {
+    if (
+      page !== 0 &&
+      selectedBreedsQuantity !== 5 &&
+      (!typeImg || !breedId || !orderValue)
+    ) {
+      getCatsGallery(
+        selectedBreedsQuantity,
+        typeImg,
+        orderValue,
+        page,
+        breedId
+      ).then(data => {
         if (data.length === selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(false);
-          setmarkSort(true);
-        }
-        if (data.length !== selectedBreedsQuantity) {
-          setListBreedsDefaultClean([...getFlatArray(data)]);
-          setConditionButton(true);
-          setmarkSort(true);
-        }
-      });
-    }
-    if (selectedBreedsQuantity === 5 && page !== 0) {
-      getCatsBreedsImg(selectedBreedsQuantity, page).then(data => {
-        if (data.length === selectedBreedsQuantity) {
-          setListBreedsDefaultClean([...getFlatArray(data)]);
-          setConditionButton(false);
-          setmarkSort(true);
         }
         if (data.length !== selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
@@ -82,88 +84,97 @@ const Gallery = () => {
         }
       });
     }
+    if (
+      selectedBreedsQuantity === 5 &&
+      (!typeImg || !breedId || !orderValue || !page)
+    ) {
+      getCatsGallery(
+        selectedBreedsQuantity,
+        typeImg,
+        orderValue,
+        page,
+        breedId
+      ).then(data => {
+        if (data.length === selectedBreedsQuantity) {
+          setListBreedsDefaultClean([...getFlatArray(data)]);
+          setConditionButton(false);
+        }
+        if (data.length !== selectedBreedsQuantity) {
+          setListBreedsDefaultClean([...getFlatArray(data)]);
+          setConditionButton(true);
+        }
+      });
+    }
+
     if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === true) {
-      let arr1 = getCatsBreedsImg(5, 0);
-      let arr2 = getCatsBreedsImg(5, 1);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       Promise.all([arr1, arr2]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
-        setmarkSort(true);
       });
     }
 
     if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === false) {
-      let arr1 = getCatsBreedsImg(5, 0);
-      let arr2 = getCatsBreedsImg(5, 1);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 0, breedId);
       Promise.all([arr1, arr2]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
-        setmarkSort(true);
       });
     }
     if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === false) {
-      let arr1 = getCatsBreedsImg(5, 0);
-      let arr2 = getCatsBreedsImg(5, 1);
-      let arr3 = getCatsBreedsImg(5, 2);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
+      let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
       Promise.all([arr1, arr2, arr3]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
-        setmarkSort(true);
       });
     }
     if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === true) {
-      let arr1 = getCatsBreedsImg(5, 0);
-      let arr2 = getCatsBreedsImg(5, 1);
-      let arr3 = getCatsBreedsImg(5, 2);
-      let arr4 = getCatsBreedsImg(5, 3);
-      Promise.all([arr1, arr2, arr3, arr4]).then(data => {
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
+      let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
+
+      Promise.all([arr1, arr2, arr3]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
-        setmarkSort(true);
       });
     }
     if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === false) {
-      let arr1 = getCatsBreedsImg(5, 0);
-      let arr2 = getCatsBreedsImg(5, 1);
-      let arr3 = getCatsBreedsImg(5, 2);
-      let arr4 = getCatsBreedsImg(5, 3);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
+      let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
+      let arr4 = getCatsGallery(5, '', orderValue, 3, breedId);
       Promise.all([arr1, arr2, arr3, arr4]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
-        setmarkSort(true);
       });
     }
     if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === true) {
-      let arr1 = getCatsBreedsImg(5, 0);
-      let arr2 = getCatsBreedsImg(5, 1);
-      let arr3 = getCatsBreedsImg(5, 2);
-      let arr4 = getCatsBreedsImg(5, 3);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
+      let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
+      let arr4 = getCatsGallery(5, '', orderValue, 3, breedId);
       Promise.all([arr1, arr2, arr3, arr4]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
-        setmarkSort(true);
       });
     }
-    if (selectedOption !== null) {
-      let arrayByname = listBreeds.filter(item => item.name === selectedOption);
-      setselectedBreedsArray(arrayByname);
-    }
-  }, [selectedBreedsQuantity, page, deletedPage, selectedOption]);
+  }, [selectedBreedsQuantity, page, deletedPage, orderValue, breedId, typeImg]);
   const onGoBack = () => {
     navigate(location?.state?.from ?? '/');
   };
   function getBreedsName() {
-    let array = listBreeds.map(item => item.name);
-    let newArray = array.filter((item, index) => array.indexOf(item) === index);
-    let options = newArray.map(item => {
-      return { label: item, value: item };
+    let k = { label: 'None', value: '' };
+    let options = listBreeds.map(item => {
+      return { label: item.name, value: item.id };
     });
-    return options;
+    return [k, ...options];
   }
   function getFlatArray(array) {
-    let cleanArray = array.filter(
-      item => item.hasOwnProperty('image') === true
-    );
+    let cleanArray = array.filter(item => item.hasOwnProperty('url') === true);
     return cleanArray;
   }
   function handleIncrement() {
@@ -172,6 +183,17 @@ const Gallery = () => {
   function handleDecrement() {
     setPage(page - 1);
     setDeletedPage(true);
+  }
+  function cheakImg(data) {
+    if (data === 'All') {
+      setTypeImg('');
+    }
+    if (data === 'Static') {
+      setTypeImg('jpg');
+    }
+    if (data === 'Animated') {
+      setTypeImg('gif');
+    }
   }
   function cheakGreeds() {
     if (selectedBreedsQuantity === 10) {
@@ -194,66 +216,15 @@ const Gallery = () => {
     gridTemplateRows: `repeat(${cheakGreeds()}, 62px)`,
     gridGap: '20px',
   };
-  function filteredByAZ() {
-    setmarkSort(true);
-  }
-  function filteredByZA() {
-    setmarkSort(false);
-    let filteredArray = Object.assign([], listBreedsDefaultClean);
-    filteredArray.sort(function (a, b) {
-      return b.name.localeCompare(a.name);
-    });
-    setdownList(filteredArray);
-  }
   let renderList = null;
-  if (selectedBreedsArray.length === 0 && markSort === true) {
-    renderList = listBreedsDefaultClean.map(({ id, image, name }) => (
-      <li key={id} className={s.gridContainerItem}>
-        <Link
-          to={`./breedsDetails/${id}`}
-          state={{ from: location }}
-          className={s.link}
-        >
-          <div className={s.modalName}>
-            <div className={s.modalNameBreed}>{name}</div>
-          </div>
-          <img src={image.url} alt="cat" className={s.gridContainerImg} />
-        </Link>
-      </li>
-    ));
-  }
-  if (selectedBreedsArray.length === 0 && markSort !== true) {
-    renderList = downList.map(({ id, image, name }) => (
-      <li key={id} className={s.gridContainerItem}>
-        <Link
-          to={`./breedsDetails/${id}`}
-          state={{ from: location }}
-          className={s.link}
-        >
-          <div className={s.modalName}>
-            <div className={s.modalNameBreed}>{name}</div>
-          </div>
-          <img src={image.url} alt="cat" className={s.gridContainerImg} />
-        </Link>
-      </li>
-    ));
-  }
-  if (selectedBreedsArray.length !== 0) {
-    renderList = selectedBreedsArray.map(({ id, image, name }) => (
-      <li key={id} className={s.gridContainerItem}>
-        <Link
-          to={`./breedsDetails/${id}`}
-          state={{ from: location }}
-          className={s.link}
-        >
-          <div className={s.modalName}>
-            <div className={s.modalNameBreed}>{name}</div>
-          </div>
-          <img src={image.url} alt="cat" className={s.gridContainerImg} />
-        </Link>
-      </li>
-    ));
-  }
+
+  renderList = listBreedsDefaultClean.map(({ url, id }) => (
+    <li key={id} className={s.gridContainerItem}>
+      <div className={s.modalName}></div>
+      <img src={url} alt="cat" className={s.gridContainerImg} />
+    </li>
+  ));
+
   return (
     <>
       <div className={s.mainWrapper}>
@@ -320,9 +291,9 @@ const Gallery = () => {
                     <span className={s.label}>Order</span>
                     <Select
                       options={optionsOrder}
-                      defaultValue={selectedOption}
+                      defaultValue={orderValue}
                       styles={order}
-                      onChange={({ value }) => setSelectedOption(value)}
+                      onChange={({ value }) => setOrderValue(value)}
                       placeholder="Random"
                     />
                   </div>
@@ -330,9 +301,9 @@ const Gallery = () => {
                     <span className={s.label}>Type</span>
                     <Select
                       options={optionsImg}
-                      defaultValue={selectedOption}
+                      defaultValue={typeImg}
                       styles={typeimg}
-                      onChange={({ value }) => setSelectedBreedsQuantity(value)}
+                      onChange={({ value }) => cheakImg(value)}
                       placeholder="Static"
                     />
                   </div>
@@ -342,17 +313,17 @@ const Gallery = () => {
                     <span className={s.label}>Breed</span>
                     <Select
                       options={getBreedsName()}
-                      defaultValue={selectedOption}
+                      defaultValue={getBreedsName()}
                       styles={breedslist}
-                      onChange={({ value }) => setSelectedOption(value)}
-                      placeholder="None"
+                      onChange={({ value }) => setBreedId(value)}
+                      placeholder={'None'}
                     />
                   </div>
                   <div>
                     <span className={s.label}>Limit</span>
                     <Select
                       options={optionsLimit}
-                      defaultValue={selectedOption}
+                      defaultValue={orderValue}
                       styles={limit}
                       onChange={({ value }) => setSelectedBreedsQuantity(value)}
                       placeholder="All"
