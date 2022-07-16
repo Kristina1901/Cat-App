@@ -33,12 +33,12 @@ const optionsLimit = [
   { value: 20, label: '20 items per page' },
 ];
 const Gallery = () => {
-  const [orderValue, setOrderValue] = useState('Random');
-  const [typeImg, setTypeImg] = useState('');
-  const [breedId, setBreedId] = useState('');
+  const [orderValue, setOrderValue] = useState(null);
+  const [typeImg, setTypeImg] = useState(null);
+  const [breedId, setBreedId] = useState(null);
   const [listBreeds, setListBreeds] = useState([]);
   const [listBreedsDefaultClean, setListBreedsDefaultClean] = useState([]);
-  const [selectedBreedsQuantity, setSelectedBreedsQuantity] = useState(5);
+  const [selectedBreedsQuantity, setSelectedBreedsQuantity] = useState(null);
   const [conditionButton, setConditionButton] = useState(false);
   const [deletedPage, setDeletedPage] = useState(false);
   const [page, setPage] = useState(0);
@@ -46,15 +46,15 @@ const Gallery = () => {
   const location = useLocation();
   useEffect(() => {
     if (
-      page === 0 &&
-      selectedBreedsQuantity === 5 &&
-      typeImg === '' &&
-      breedId === '' &&
-      orderValue === 'Random'
+      page === null &&
+      selectedBreedsQuantity === null &&
+      typeImg === null &&
+      breedId === null &&
+      orderValue === null
     ) {
       getCatsBreeds().then(data => setListBreeds(data));
 
-      getCatsGallery(5, '', orderValue, 0, breedId)
+      getCatsGallery(5, '', 'Random', 0, '')
         .then(data => getFlatArray(data))
         .then(data => {
           setListBreedsDefaultClean(data);
