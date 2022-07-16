@@ -41,7 +41,6 @@ const Gallery = () => {
   const [selectedBreedsQuantity, setSelectedBreedsQuantity] = useState(5);
   const [conditionButton, setConditionButton] = useState(false);
   const [deletedPage, setDeletedPage] = useState(false);
-  // const [selectedBreedsArray, setselectedBreedsArray] = useState([]);
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
@@ -55,7 +54,7 @@ const Gallery = () => {
     ) {
       getCatsBreeds().then(data => setListBreeds(data));
 
-      getCatsGallery(5, '', orderValue, page, breedId)
+      getCatsGallery(5, '', orderValue, 0, breedId)
         .then(data => getFlatArray(data))
         .then(data => {
           setListBreedsDefaultClean(data);
@@ -63,9 +62,11 @@ const Gallery = () => {
       setConditionButton(false);
     }
     if (
-      page !== 0 &&
-      selectedBreedsQuantity !== 5 &&
-      (!typeImg || !breedId || !orderValue)
+      !typeImg ||
+      !breedId ||
+      !orderValue ||
+      !page ||
+      !selectedBreedsQuantity
     ) {
       getCatsGallery(
         selectedBreedsQuantity,
@@ -84,21 +85,21 @@ const Gallery = () => {
         }
       });
     }
-    if (
-      selectedBreedsQuantity === 5 &&
-      (!typeImg || !breedId || !orderValue || !page)
-    ) {
-      getCatsGallery(5, typeImg, orderValue, page, breedId).then(data => {
-        if (data.length === selectedBreedsQuantity) {
-          setListBreedsDefaultClean([...getFlatArray(data)]);
-          setConditionButton(false);
-        }
-        if (data.length !== selectedBreedsQuantity) {
-          setListBreedsDefaultClean([...getFlatArray(data)]);
-          setConditionButton(true);
-        }
-      });
-    }
+    // if (
+    //   selectedBreedsQuantity === 5 &&
+    //   (!typeImg || !breedId || !orderValue || !page)
+    // ) {
+    //   getCatsGallery(5, typeImg, orderValue, page, breedId).then(data => {
+    //     if (data.length === selectedBreedsQuantity) {
+    //       setListBreedsDefaultClean([...getFlatArray(data)]);
+    //       setConditionButton(false);
+    //     }
+    //     if (data.length !== selectedBreedsQuantity) {
+    //       setListBreedsDefaultClean([...getFlatArray(data)]);
+    //       setConditionButton(true);
+    //     }
+    //   });
+    // }
 
     if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === true) {
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
