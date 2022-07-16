@@ -41,7 +41,7 @@ const Gallery = () => {
   const [selectedBreedsQuantity, setSelectedBreedsQuantity] = useState(null);
   const [conditionButton, setConditionButton] = useState(false);
   const [deletedPage, setDeletedPage] = useState(false);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -60,6 +60,11 @@ const Gallery = () => {
           setListBreedsDefaultClean(data);
         });
       setConditionButton(false);
+      setPage(0);
+      setSelectedBreedsQuantity(5);
+      setTypeImg('');
+      setBreedId('');
+      setOrderValue('');
     }
     if (
       !typeImg ||
@@ -86,8 +91,8 @@ const Gallery = () => {
       });
     }
     // if (
-    //   selectedBreedsQuantity === 5 &&
-    //   (!typeImg || !breedId || !orderValue || !page)
+    //   page === 0 &&
+    //   (!typeImg || !breedId || !orderValue || !page || !selectedBreedsQuantity)
     // ) {
     //   getCatsGallery(5, typeImg, orderValue, page, breedId).then(data => {
     //     if (data.length === selectedBreedsQuantity) {
