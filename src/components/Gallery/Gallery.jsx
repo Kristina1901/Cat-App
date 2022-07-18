@@ -15,6 +15,7 @@ import order from '../../select/order';
 import typeimg from '../../select/typeimg';
 import breedslist from '../../select/breedslist';
 import limit from '../../select/limit';
+import Modal from '../Modal/Modal';
 
 const optionsImg = [
   { value: 'All', label: 'All' },
@@ -42,6 +43,7 @@ const Gallery = () => {
   const [conditionButton, setConditionButton] = useState(false);
   const [deletedPage, setDeletedPage] = useState(false);
   const [page, setPage] = useState(null);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -195,6 +197,9 @@ const Gallery = () => {
       setTypeImg('gif');
     }
   }
+  function closeModal() {
+    setOpen(!open);
+  }
   function cheakGreeds() {
     if (selectedBreedsQuantity === 10) {
       return selectedBreedsQuantity + 2;
@@ -282,7 +287,9 @@ const Gallery = () => {
                 <div className={s.linkActiveContainer}>
                   <div className={s.linkActive}>Gallery</div>
                 </div>
-                <button className={s.upload}>Upload</button>
+                <button className={s.upload} onClick={() => setOpen(true)}>
+                  Upload
+                </button>
               </div>
 
               <div className={s.containerSelect}>
@@ -357,6 +364,7 @@ const Gallery = () => {
               </div>
             </div>
           </div>
+          <Modal trigger={open} onClose={closeModal} />
         </div>
       </div>
     </>
