@@ -1,0 +1,21 @@
+.rodalMask {
+  background-color: rgba(29, 29, 29, 0.6);
+}
+.button {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 10px;
+  position: absolute;
+  cursor: pointer;
+  top: 16px;
+  right: 16px;
+  width: 16px;
+  height: 16px;
+  background-image: url(./img/close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 45;
+}
+.rodal-close {
+  background: red;
+}
