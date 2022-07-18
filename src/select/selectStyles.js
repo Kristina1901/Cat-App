@@ -68,6 +68,7 @@ const customStyles = {
     position: 'relative',
     height: '262px',
   }),
+
   singleValue: () => ({
     fontFamily: 'Jost',
     fontStyle: 'normal',
