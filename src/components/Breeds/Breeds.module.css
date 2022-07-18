@@ -1,3 +1,10 @@
+* {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
 .mainWrapper {
   padding-top: 30px;
   padding-left: 133px;
