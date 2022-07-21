@@ -16,6 +16,7 @@ import typeimg from '../../select/typeimg';
 import breedslist from '../../select/breedslist';
 import limit from '../../select/limit';
 import Modal from '../Modal/Modal';
+import Loader from 'components/Loader/Loader';
 
 const optionsImg = [
   { value: 'All', label: 'All' },
@@ -45,6 +46,7 @@ const Gallery = ({ getGalleryFavourites }) => {
   const [page, setPage] = useState(0);
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(false);
+  const [pending, setPending] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -55,12 +57,14 @@ const Gallery = ({ getGalleryFavourites }) => {
       breedId === '' &&
       orderValue === 'Random'
     ) {
+      setPending(true);
       getCatsBreeds().then(data => setListBreeds(data));
 
       getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
         .then(data => getFlatArray(data))
         .then(data => {
           setListBreedsDefaultClean(data);
+          setPending(false);
         });
       setConditionButton(false);
     }
@@ -68,6 +72,7 @@ const Gallery = ({ getGalleryFavourites }) => {
       (!typeImg || !breedId || !orderValue || !selectedBreedsQuantity) &&
       page !== 0
     ) {
+      setPending(true);
       getCatsGallery(
         selectedBreedsQuantity,
         typeImg,
@@ -85,6 +90,7 @@ const Gallery = ({ getGalleryFavourites }) => {
           setConditionButton(true);
           setUpdate(false);
         }
+        setPending(false);
       });
     }
     if (
@@ -94,6 +100,7 @@ const Gallery = ({ getGalleryFavourites }) => {
         selectedBreedsQuantity !== 5) &&
       page === 0
     ) {
+      setPending(true);
       getCatsGallery(
         selectedBreedsQuantity,
         typeImg,
@@ -111,6 +118,7 @@ const Gallery = ({ getGalleryFavourites }) => {
           setConditionButton(true);
           setUpdate(false);
         }
+        setPending(false);
       });
     }
 
@@ -123,11 +131,13 @@ const Gallery = ({ getGalleryFavourites }) => {
       deletedPage === true &&
       orderValue !== 'Random'
     ) {
+      setPending(true);
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       Promise.all([arr1, arr2]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setPending(false);
       });
     }
 
@@ -137,11 +147,13 @@ const Gallery = ({ getGalleryFavourites }) => {
       deletedPage === false &&
       orderValue !== 'Random'
     ) {
+      setPending(true);
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 0, breedId);
       Promise.all([arr1, arr2]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setPending(false);
       });
     }
     if (
@@ -150,12 +162,14 @@ const Gallery = ({ getGalleryFavourites }) => {
       deletedPage === false &&
       orderValue !== 'Random'
     ) {
+      setPending(true);
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
       Promise.all([arr1, arr2, arr3]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setPending(false);
       });
     }
     if (
@@ -164,6 +178,7 @@ const Gallery = ({ getGalleryFavourites }) => {
       deletedPage === true &&
       orderValue !== 'Random'
     ) {
+      setPending(true);
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
@@ -171,6 +186,7 @@ const Gallery = ({ getGalleryFavourites }) => {
       Promise.all([arr1, arr2, arr3]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setPending(false);
       });
     }
     if (
@@ -179,6 +195,7 @@ const Gallery = ({ getGalleryFavourites }) => {
       deletedPage === false &&
       orderValue !== 'Random'
     ) {
+      setPending(true);
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
@@ -186,6 +203,7 @@ const Gallery = ({ getGalleryFavourites }) => {
       Promise.all([arr1, arr2, arr3, arr4]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setPending(false);
       });
     }
     if (
@@ -194,6 +212,7 @@ const Gallery = ({ getGalleryFavourites }) => {
       deletedPage === true &&
       orderValue !== 'Random'
     ) {
+      setPending(true);
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
@@ -201,6 +220,7 @@ const Gallery = ({ getGalleryFavourites }) => {
       Promise.all([arr1, arr2, arr3, arr4]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
+        setPending(false);
       });
     }
   }, [
@@ -424,7 +444,11 @@ const Gallery = ({ getGalleryFavourites }) => {
                 </div>
               </div>
               <div className={s.gridContainerWidth}>
-                <ul style={divStyle}>{renderList}</ul>
+                {pending === false ? (
+                  <ul style={divStyle}>{renderList}</ul>
+                ) : (
+                  <Loader />
+                )}
               </div>
               <div className={s.buttonsContainerPagination}>
                 <button

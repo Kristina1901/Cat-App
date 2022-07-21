@@ -236,3 +236,308 @@ ul {
   text-transform: capitalize;
   top: -33px;
 }
+.mainWrapper {
+  padding-top: 30px;
+  padding-left: 133px;
+  padding-right: 30px;
+  padding-bottom: 18px;
+}
+.wrapper {
+  display: flex;
+  background: #e5e5e5;
+  justify-content: space-between;
+}
+.buttonSubmit {
+  padding: 10px;
+  background: #fbe0dc;
+  border-radius: 10px;
+  border: none;
+}
+.searching {
+  border: none;
+  display: inline-block;
+  outline: none;
+  width: 100%;
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height, or 150% */
+
+  color: #1d1d1d;
+}
+.form {
+  background: #ffffff;
+  border-radius: 20px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  width: 440px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+  border: 2px solid white;
+}
+.form:hover {
+  border: 2px solid #fbe0dc;
+}
+.form:active {
+  border: 2px solid #fbe0dc;
+}
+.grade {
+  padding: 15px;
+  border: none;
+  background: #ffffff;
+  border-radius: 20px;
+  margin-right: 10px;
+  display: block;
+}
+.grade:hover {
+  background: #fbe0dc;
+}
+.grade:focus {
+  background: #ff868e;
+}
+.grade:last-child {
+  margin-right: 0px;
+}
+.commonMark {
+  display: flex;
+  flex-direction: column;
+}
+.wrapperForm {
+  display: flex;
+  margin-bottom: 10px;
+}
+.thumbLinks {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+/* .gradeSmile {
+  background-image: url('./img/heart_white.svg');
+} */
+.gradeSmile {
+  background-image: url('./img/smile.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+}
+.grade:active .gradeSmile {
+  background-image: url('./img/smile_white.svg');
+}
+.gradeHeart {
+  background-image: url('./img/heart.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 26px;
+}
+.grade:active .gradeHeart {
+  background-image: url('./img/heart_white.svg');
+}
+.gradeSad {
+  background-image: url('./img/sad.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+}
+.grade:active .gradeSad {
+  background-image: url('./img/sad_white.svg');
+}
+.sectionVoting {
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 20px;
+}
+.back {
+  background: #fbe0dc;
+  border-radius: 10px;
+  border: none;
+  padding-top: 10px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-bottom: 10px;
+  margin-right: 10px;
+}
+.backArrow {
+  background-image: url('./img/arrow.svg');
+  width: 12px;
+  height: 20px;
+}
+.back:hover {
+  background: #ff868e;
+}
+.back:hover .backArrow {
+  background-image: url('./img/white_arrow.svg');
+}
+.linkActive {
+  background: #ff868e;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #ffffff;
+  padding-right: 30px;
+  padding-left: 30px;
+  text-transform: uppercase;
+}
+.navlink {
+  display: flex;
+}
+.catPhoto {
+  border-radius: 20px;
+  margin-top: 20px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.itemButtonFirst {
+  padding: 25px;
+  background: #97eab9;
+  margin-right: 4px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-left: 1px solid white;
+  border-right: none;
+  border-top: 1px solid white;
+  border-bottom: none;
+}
+.itemButtonFirst:hover {
+  background: rgba(151, 234, 185, 0.3);
+}
+.itemButtonFirst:hover .itemButtonSmile {
+  background-image: url('./img/smile_green.svg');
+}
+.itemButtonSmile {
+  background-image: url('./img/smile_white.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+}
+.itemButtonSecond {
+  padding: 25px;
+  border: none;
+  margin-right: 4px;
+  background: #ff868e;
+}
+.itemButtonSecond:hover {
+  background: rgba(255, 134, 142, 0.3);
+}
+.itemButtonSecond:hover .itemButtonHeart {
+  background-image: url('./img/heart_red.svg');
+}
+.itemButtonHeart {
+  background-image: url('./img/heart_white.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 26px;
+}
+.itemButtonThird {
+  padding: 25px;
+  border: none;
+  background: #ffd280;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.itemButtonThird:hover {
+  background: rgba(255, 210, 128, 0.3);
+}
+.itemButtonThird:hover .itemButtonSad {
+  background-image: url('./img/sad_yellow.svg');
+}
+.itemButtonThird:active {
+  background: #ffd280;
+}
+.itemButtonThird:active .itemButtonSad {
+  background-image: url('./img/sad_white.svg');
+}
+.itemButtonSad {
+  background-image: url('./img/sad_white.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+}
+.thumbImg {
+  position: relative;
+}
+.listLikes {
+  margin-top: 52px;
+}
+.listLikes {
+  list-style: none;
+}
+.listLikesitem {
+  background: #f8f8f7;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.listLikesItem {
+  display: flex;
+  justify-content: space-between;
+  background: #f8f8f7;
+  border-radius: 10px;
+  padding-left: 25px;
+  padding-right: 22px;
+  margin-bottom: 10px;
+}
+.listLikesTime {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1d1d1d;
+  background: #ffffff;
+  border-radius: 5px;
+  padding-top: 3px;
+  padding-right: 10px;
+  padding-left: 10px;
+  text-align: center;
+}
+.listLikesMessage {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #8c8c8c;
+  text-align: left;
+  flex-grow: 2;
+  margin-left: 30px;
+}
+.listLikesPhotoId {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 29px;
+  color: #1d1d1d;
+}
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 640px;
+  height: 380px;
+}

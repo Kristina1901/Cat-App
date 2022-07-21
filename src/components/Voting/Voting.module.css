@@ -337,3 +337,10 @@
   display: flex;
   margin-bottom: 10px;
 }
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 640px;
+  height: 380px;
+}

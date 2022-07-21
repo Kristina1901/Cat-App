@@ -8,30 +8,35 @@ import breeds from '../Logo/img/breeds.png';
 import gallery from '../Logo/img/gallery.png';
 import Form from 'components/Form/Form';
 import styles from '../Logo/Logo.module.css';
-// import { getCatsBreedsbyName } from '../../services/cats-api';
+import Loader from 'components/Loader/Loader';
 import { getCatsBreedsImage } from '../../services/cats-api';
 const BreedsDetails = () => {
   const [breed, setBreed] = useState([]);
   const [page, setPage] = useState(0);
   const [img, setImg] = useState('');
   const [activeId, setActiveId] = useState(0);
+  const [pending, setPending] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
     if (id !== '' && page === 0) {
+      setPending(true);
       getCatsBreedsImage(id, 0)
         .then(data => {
           setImg(data[0].url);
           setBreed(data[0].breeds);
+          setPending(false);
         })
         .catch(console.log);
     }
     if (page !== 0) {
+      setPending(true);
       getCatsBreedsImage(id, page)
         .then(data => {
           setImg(data[0].url);
           setBreed(data[0].breeds);
+          setPending(false);
         })
         .catch(console.log);
     }
@@ -88,7 +93,32 @@ const BreedsDetails = () => {
           </div>
         </header>
         <div className={s.commonMark}>
-          <Form />
+          <div className={s.wrapperForm}>
+            <Form />
+            <div className={s.thumbLinks}>
+              <Link
+                to={'../likes'}
+                state={{ from: location }}
+                className={s.grade}
+              >
+                <div className={s.gradeSmile}></div>
+              </Link>
+              <Link
+                to={'../favourites'}
+                state={{ from: location }}
+                className={s.grade}
+              >
+                <div className={s.gradeHeart}></div>
+              </Link>
+              <Link
+                to={'../dislikes'}
+                state={{ from: location }}
+                className={s.grade}
+              >
+                <div className={s.gradeSad}></div>
+              </Link>
+            </div>
+          </div>
           <div className={s.sectionDetails}>
             <div className={s.navlink}>
               <button className={s.back} onClick={onGoBack}>
@@ -97,53 +127,57 @@ const BreedsDetails = () => {
               <div className={s.linkActive}>Breeds</div>
               <div className={s.linkActiveId}>{id}</div>
             </div>
-            <div className={s.thumbImg}>
-              <div className={s.img}></div>
-              <img
-                src={img}
-                alt="cat"
-                className={s.catPhoto}
-                width="640px"
-                height="360px"
-              />
-              <div className={s.listButton}>
-                <button
-                  className={activeId === 0 ? s.activeLink : s.buttonSwitcher}
-                  onClick={() => {
-                    setPage(0);
-                    setActiveId(0);
-                  }}
-                ></button>
-                <button
-                  className={activeId === 1 ? s.activeLink : s.buttonSwitcher}
-                  onClick={() => {
-                    setPage(1);
-                    setActiveId(1);
-                  }}
-                ></button>
-                <button
-                  className={activeId === 2 ? s.activeLink : s.buttonSwitcher}
-                  onClick={() => {
-                    setPage(2);
-                    setActiveId(2);
-                  }}
-                ></button>
-                <button
-                  className={activeId === 3 ? s.activeLink : s.buttonSwitcher}
-                  onClick={() => {
-                    setPage(3);
-                    setActiveId(3);
-                  }}
-                ></button>
-                <button
-                  className={activeId === 4 ? s.activeLink : s.buttonSwitcher}
-                  onClick={() => {
-                    setPage(4);
-                    setActiveId(4);
-                  }}
-                ></button>
+            {pending === false ? (
+              <div className={s.thumbImg}>
+                <div className={s.img}></div>
+                <img
+                  src={img}
+                  alt="cat"
+                  className={s.catPhoto}
+                  width="640px"
+                  height="360px"
+                />
+                <div className={s.listButton}>
+                  <button
+                    className={activeId === 0 ? s.activeLink : s.buttonSwitcher}
+                    onClick={() => {
+                      setPage(0);
+                      setActiveId(0);
+                    }}
+                  ></button>
+                  <button
+                    className={activeId === 1 ? s.activeLink : s.buttonSwitcher}
+                    onClick={() => {
+                      setPage(1);
+                      setActiveId(1);
+                    }}
+                  ></button>
+                  <button
+                    className={activeId === 2 ? s.activeLink : s.buttonSwitcher}
+                    onClick={() => {
+                      setPage(2);
+                      setActiveId(2);
+                    }}
+                  ></button>
+                  <button
+                    className={activeId === 3 ? s.activeLink : s.buttonSwitcher}
+                    onClick={() => {
+                      setPage(3);
+                      setActiveId(3);
+                    }}
+                  ></button>
+                  <button
+                    className={activeId === 4 ? s.activeLink : s.buttonSwitcher}
+                    onClick={() => {
+                      setPage(4);
+                      setActiveId(4);
+                    }}
+                  ></button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <Loader />
+            )}
             <div className={s.infoBreed}>
               <p className={s.infoBreedFamily}>Family companion cat</p>
 

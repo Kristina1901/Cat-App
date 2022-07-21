@@ -13,18 +13,20 @@ import breeds from '../Logo/img/breeds.png';
 import gallery from '../Logo/img/gallery.png';
 import Form from 'components/Form/Form';
 import styles from '../Logo/Logo.module.css';
+import Loader from 'components/Loader/Loader';
 const Voting = ({ changeLikes, changeFavourites, changeDislikes }) => {
   const [cat, setCat] = useState('');
   const [items, setItems] = useState([]);
+  const [pending, setPending] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     if (cat === '') {
-      getCatsVote().then(data => setCat(data));
+      setPending(true);
+      getCatsVote().then(data => {
+        setCat(data);
+        setPending(false);
+      });
     }
-    // if (cat.length === 0) {
-    //   setCat([]);
-    //   getCatsVote().then(data => setCat(data));
-    // }
   }, [cat]);
 
   const onGoBack = () => {
@@ -43,6 +45,7 @@ const Voting = ({ changeLikes, changeFavourites, changeDislikes }) => {
       message: 'was added to Likes',
       pic: smile_green,
     };
+    setPending(true);
     setItems(previtems => [item, ...previtems]);
     changeLikes(cat);
   };
@@ -54,6 +57,7 @@ const Voting = ({ changeLikes, changeFavourites, changeDislikes }) => {
       message: 'was added to Favourites',
       pic: heart_red,
     };
+    setPending(true);
     setItems(previtems => [item, ...previtems]);
     changeFavourites(cat);
   };
@@ -65,13 +69,20 @@ const Voting = ({ changeLikes, changeFavourites, changeDislikes }) => {
       message: 'was added to Dislakes',
       pic: sad_yellow,
     };
+    setPending(true);
     setItems(previtems => [item, ...previtems]);
     changeDislikes(cat);
   };
   const newFetch = () => {
     let promise = new Promise(function (resolve) {
-      resolve(getCatsVote().then(data => setCat(data)));
+      resolve(
+        getCatsVote().then(data => {
+          setCat(data);
+          setPending(false);
+        })
+      );
     });
+
     return promise;
   };
   const location = useLocation();
@@ -155,44 +166,52 @@ const Voting = ({ changeLikes, changeFavourites, changeDislikes }) => {
               </button>
               <div className={s.linkActive}>Voting</div>
             </div>
-            <div className={s.thumbImg}>
-              <img
-                src={cat.length === 0 ? cat_default : cat[0].url}
-                alt="cat"
-                width="640px"
-                height="360px"
-                className={s.catPhoto}
-              />
-              <div className={s.listButton}>
-                <button
-                  className={s.itemButtonFirst}
-                  onClick={() => {
-                    addItemPositiveList();
-                    newFetch();
-                  }}
-                >
-                  <div className={s.itemButtonSmile}></div>
-                </button>
-                <button
-                  className={s.itemButtonSecond}
-                  onClick={() => {
-                    addItemFavoritesList();
-                    newFetch();
-                  }}
-                >
-                  <div className={s.itemButtonHeart}></div>
-                </button>
-                <button
-                  className={s.itemButtonThird}
-                  onClick={() => {
-                    addItemDislikedList();
-                    newFetch();
-                  }}
-                >
-                  <div className={s.itemButtonSad}></div>
-                </button>
+            {pending === false ? (
+              <div className={s.thumbImg}>
+                <img
+                  src={cat.length === 0 ? cat_default : cat[0].url}
+                  alt="cat"
+                  width="640px"
+                  height="360px"
+                  className={s.catPhoto}
+                />
+                <div className={s.listButton}>
+                  <button
+                    className={s.itemButtonFirst}
+                    onClick={() => {
+                      setPending(true);
+                      addItemPositiveList();
+                      newFetch();
+                    }}
+                  >
+                    <div className={s.itemButtonSmile}></div>
+                  </button>
+                  <button
+                    className={s.itemButtonSecond}
+                    onClick={() => {
+                      setPending(true);
+                      addItemFavoritesList();
+                      newFetch();
+                    }}
+                  >
+                    <div className={s.itemButtonHeart}></div>
+                  </button>
+                  <button
+                    className={s.itemButtonThird}
+                    onClick={() => {
+                      setPending(true);
+                      addItemDislikedList();
+                      newFetch();
+                    }}
+                  >
+                    <div className={s.itemButtonSad}></div>
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <Loader />
+            )}
+
             <ul className={s.listLikes}>
               {items.map(({ id, time, idCat, message, pic }) => (
                 <li key={id} className={s.listLikesItem}>

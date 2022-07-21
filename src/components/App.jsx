@@ -1,5 +1,6 @@
 import { lazy, Suspense, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import Loader from './Loader/Loader';
 
 const HomePage = lazy(() => import('./HomePage'));
 const Voting = lazy(() => import('./Voting'));
@@ -28,7 +29,7 @@ export const App = () => {
 
   return (
     <>
-      <Suspense fallback={<div>Download...</div>}>
+      <Suspense fallback={Loader}>
         <Routes>
           <Route path="/" element={<HomePage />} />
 

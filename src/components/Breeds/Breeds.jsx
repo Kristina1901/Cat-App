@@ -13,6 +13,7 @@ import s from './Breeds.module.css';
 import Form from 'components/Form/Form';
 import Select from 'react-select';
 import selectStyles from '../../select/selectStyles';
+import Loader from 'components/Loader/Loader';
 
 const options = [
   { value: 5, label: 'Limit: 5' },
@@ -31,19 +32,23 @@ const Breeds = () => {
   const [page, setPage] = useState(0);
   const [markSort, setmarkSort] = useState(true);
   const [downList, setdownList] = useState([]);
+  const [pending, setPending] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
     if (page === 0 && selectedBreedsQuantity === 5) {
+      setPending(true);
       getCatsBreeds().then(data => setListBreeds(data));
       getCatsBreedsImg(5, 0)
         .then(data => getFlatArray(data))
         .then(data => {
           setListBreedsDefaultClean(data);
+          setPending(false);
         });
       setConditionButton(false);
     }
     if (selectedBreedsQuantity !== 5 && page !== 0) {
+      setPending(true);
       getCatsBreedsImg(selectedBreedsQuantity, page).then(data => {
         if (data.length === selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
@@ -55,9 +60,11 @@ const Breeds = () => {
           setConditionButton(true);
           setmarkSort(true);
         }
+        setPending(false);
       });
     }
     if (selectedBreedsQuantity === 5 && page !== 0) {
+      setPending(true);
       getCatsBreedsImg(selectedBreedsQuantity, page).then(data => {
         if (data.length === selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
@@ -68,28 +75,34 @@ const Breeds = () => {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(true);
         }
+        setPending(false);
       });
     }
     if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === true) {
+      setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
       Promise.all([arr1, arr2]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
         setmarkSort(true);
+        setPending(false);
       });
     }
 
     if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === false) {
+      setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
       Promise.all([arr1, arr2]).then(data => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
         setmarkSort(true);
+        setPending(false);
       });
     }
     if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === false) {
+      setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
       let arr3 = getCatsBreedsImg(5, 2);
@@ -97,9 +110,11 @@ const Breeds = () => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
         setmarkSort(true);
+        setPending(false);
       });
     }
     if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === true) {
+      setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
       let arr3 = getCatsBreedsImg(5, 2);
@@ -107,9 +122,11 @@ const Breeds = () => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
         setmarkSort(true);
+        setPending(false);
       });
     }
     if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === false) {
+      setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
       let arr3 = getCatsBreedsImg(5, 2);
@@ -118,9 +135,11 @@ const Breeds = () => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
         setmarkSort(true);
+        setPending(false);
       });
     }
     if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === true) {
+      setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
       let arr3 = getCatsBreedsImg(5, 2);
@@ -129,6 +148,7 @@ const Breeds = () => {
         setListBreedsDefaultClean([...getFlatArray(data.flat())]);
         setConditionButton(false);
         setmarkSort(true);
+        setPending(false);
       });
     }
     if (selectedOption !== null) {
@@ -346,7 +366,11 @@ const Breeds = () => {
                 </button>
               </div>
               <div className={s.gridContainerWidth}>
-                <ul style={divStyle}>{renderList}</ul>
+                {pending === false ? (
+                  <ul style={divStyle}>{renderList}</ul>
+                ) : (
+                  <Loader />
+                )}
               </div>
               <div className={s.buttonsContainerPagination}>
                 <button
