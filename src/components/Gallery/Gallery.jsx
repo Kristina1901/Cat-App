@@ -63,12 +63,6 @@ const Gallery = ({ getGalleryFavourites }) => {
           setListBreedsDefaultClean(data);
         });
       setConditionButton(false);
-      // setPage(0);
-      // setSelectedBreedsQuantity(5);
-      // setTypeImg('');
-      // setBreedId('');
-      // setOrderValue('Random');
-      // setUpdate(false);
     }
     if (
       (!typeImg || !breedId || !orderValue || !selectedBreedsQuantity) &&
@@ -119,36 +113,16 @@ const Gallery = ({ getGalleryFavourites }) => {
         }
       });
     }
-    // if (
-    //   (!typeImg ||
-    //     !breedId ||
-    //     !orderValue ||
-    //     !page ||
-    //     !selectedBreedsQuantity) &&
-    //   update === false
-    // ) {
-    //   getCatsGallery(
-    //     selectedBreedsQuantity,
-    //     typeImg,
-    //     orderValue,
-    //     page,
-    //     breedId
-    //   ).then(data => {
-    //     if (data.length === selectedBreedsQuantity) {
-    //       setListBreedsDefaultClean([...getFlatArray(data)]);
-    //       setConditionButton(false);
-    //     }
-    //     if (data.length !== selectedBreedsQuantity) {
-    //       setListBreedsDefaultClean([...getFlatArray(data)]);
-    //       setConditionButton(true);
-    //     }
-    //   });
-    // }
 
     if (update === true) {
       setOrderValue('');
     }
-    if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === true) {
+    if (
+      selectedBreedsQuantity === 10 &&
+      page === 0 &&
+      deletedPage === true &&
+      orderValue !== 'Random'
+    ) {
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       Promise.all([arr1, arr2]).then(data => {
@@ -157,7 +131,12 @@ const Gallery = ({ getGalleryFavourites }) => {
       });
     }
 
-    if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === false) {
+    if (
+      selectedBreedsQuantity === 10 &&
+      page === 0 &&
+      deletedPage === false &&
+      orderValue !== 'Random'
+    ) {
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 0, breedId);
       Promise.all([arr1, arr2]).then(data => {
@@ -165,7 +144,12 @@ const Gallery = ({ getGalleryFavourites }) => {
         setConditionButton(false);
       });
     }
-    if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === false) {
+    if (
+      selectedBreedsQuantity === 15 &&
+      page === 0 &&
+      deletedPage === false &&
+      orderValue !== 'Random'
+    ) {
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
@@ -174,7 +158,12 @@ const Gallery = ({ getGalleryFavourites }) => {
         setConditionButton(false);
       });
     }
-    if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === true) {
+    if (
+      selectedBreedsQuantity === 15 &&
+      page === 0 &&
+      deletedPage === true &&
+      orderValue !== 'Random'
+    ) {
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
@@ -184,7 +173,12 @@ const Gallery = ({ getGalleryFavourites }) => {
         setConditionButton(false);
       });
     }
-    if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === false) {
+    if (
+      selectedBreedsQuantity === 20 &&
+      page === 0 &&
+      deletedPage === false &&
+      orderValue !== 'Random'
+    ) {
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
@@ -194,7 +188,12 @@ const Gallery = ({ getGalleryFavourites }) => {
         setConditionButton(false);
       });
     }
-    if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === true) {
+    if (
+      selectedBreedsQuantity === 20 &&
+      page === 0 &&
+      deletedPage === true &&
+      orderValue !== 'Random'
+    ) {
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
       let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
