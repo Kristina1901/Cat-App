@@ -74,3 +74,17 @@ export async function getCatsGallery(limit, img, order, page, breed) {
 
   return data;
 }
+
+export async function register(cat) {
+  let response = await fetch('https://api.thecatapi.com/v1/images/upload', {
+    method: 'POST',
+    body: cat,
+
+    headers: {
+      'x-api-key': '17d94b92-754f-46eb-99a0-65be65b5d18f',
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
+
+  return response.json();
+}
