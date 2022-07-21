@@ -1,25 +1,48 @@
 import { useState, useRef, useEffect } from 'react';
 import s from './Drop.module.css';
+import { register } from '../../services/cats-api';
+import { nanoid } from 'nanoid';
 
 function Drop() {
   const [photo, setPhoto] = useState(null);
-  // const [dragPhoto, setDragPhoto] = useState(null);
   const [url, setUrl] = useState(null);
   const [dragActive, setDragActive] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [notice, setNotice] = useState(null);
+  const [button, setButton] = useState('');
+  const [background, setBackground] = useState(false);
   const inputRef = useRef(null);
   useEffect(() => {
-    if (photo === null) {
+    if (photo === null && loading === false && notice === false) {
       return;
     }
-    if (photo !== null) {
+    if (photo !== null && photo !== false) {
       previewFile(photo);
     }
-    // if (dragPhoto !== null) {
-    //   previewFile(dragPhoto);
-    // }
+    if (loading !== false) {
+      register(updateFormInput(photo, nanoid())).then(data => {
+        if (data.hasOwnProperty('message') === false) {
+          setNotice(true);
+          setButton(true);
+          setBackground(true);
+        }
+        if (data.hasOwnProperty('message') !== false) {
+          setNotice(false);
+          setButton(true);
+          setBackground(false);
+        }
+      });
+    }
   });
 
-  // handle drag events
+  function updateFormInput(cat, id) {
+    let formData = new FormData();
+    formData.append('file', cat);
+    formData.set('sub_id', id);
+
+    return formData;
+  }
+
   const handleDrag = function (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -30,7 +53,6 @@ function Drop() {
     }
   };
 
-  // triggers when file is dropped
   const handleDrop = function (e) {
     e.preventDefault();
     e.stopPropagation();
@@ -59,10 +81,26 @@ function Drop() {
       setUrl(reader.result);
     };
   }
-
+  let status;
+  if (notice === false) {
+    status = (
+      <div className={s.message}>
+        <div className={s.noticeIcon}></div>
+        <p className={s.notice}>No Cat found - try a different one</p>
+      </div>
+    );
+  }
+  if (notice === true) {
+    status = (
+      <div className={s.message}>
+        <div className={s.noticeIconCorrect}></div>
+        <p className={s.notice}>Thanks for the Upload - Cat found!</p>
+      </div>
+    );
+  }
   return (
     <div className={s.main}>
-      <div className={s.drop}>
+      <div className={s.containerForm}>
         <p className={s.title}>Upload a .jpg or .png Cat Image</p>
         <p className={s.text}>
           Any uploads must comply with the{' '}
@@ -76,15 +114,6 @@ function Drop() {
           onSubmit={e => e.preventDefault()}
           className={s.dropArea}
         >
-          <div className={s.m}>
-            <img
-              src={url}
-              alt="cat"
-              width="559px"
-              height="280px"
-              className={photo === null ? s.loadedPhotoNone : s.loadedPhoto}
-            />
-          </div>
           <input
             ref={inputRef}
             type="file"
@@ -92,6 +121,7 @@ function Drop() {
             multiple={true}
             onChange={handleChange}
             className={s.inputFileUpload}
+            name="file"
           />
           <label
             id="label-file-upload"
@@ -119,19 +149,41 @@ function Drop() {
               className={s.dragFileElement}
             ></div>
           )}
+          {photo !== null && background !== true && (
+            <div
+              className={
+                background !== true ? s.containerimgWrong : s.containerimg
+              }
+            >
+              <img
+                src={url}
+                alt="cat"
+                width="559px"
+                height="280px"
+                className={s.loadedPhoto}
+              />
+            </div>
+          )}
         </form>
+      </div>
 
-        {photo === null ? (
-          <span className={s.noFile}>No file selected</span>
-        ) : (
+      {photo === null ? (
+        <span className={s.noFile}>No file selected</span>
+      ) : (
+        <>
           <div className={s.containerPhotoInfo}>
             <span className={s.name}>
               Image File Name: <span>{photo.name}</span>
             </span>
-            <button className={s.upload}>Upload Photo</button>
+            {button !== true && (
+              <button className={s.upload} onClick={() => setLoading(true)}>
+                Upload Photo
+              </button>
+            )}
           </div>
-        )}
-      </div>
+          {status}
+        </>
+      )}
     </div>
   );
 }

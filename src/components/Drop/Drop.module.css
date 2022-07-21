@@ -39,13 +39,7 @@
 .upload-button:hover {
   text-decoration-line: underline;
 }
-.drop {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding-top: 100px;
-}
+
 .title {
   font-family: 'Jost';
   font-style: normal;
@@ -55,6 +49,7 @@
   color: #1d1d1d;
   margin: 0;
   margin-bottom: 10px;
+  text-align: center;
 }
 .text {
   font-family: 'Jost';
@@ -65,6 +60,7 @@
   color: #8c8c8c;
   margin: 0;
   margin-bottom: 40px;
+  text-align: center;
 }
 .dropArea {
   background: #ffffff;
@@ -78,6 +74,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .loadedPhoto {
   object-fit: cover;
@@ -140,6 +137,8 @@
   font-size: 20px;
   line-height: 30px;
   color: #8c8c8c;
+  text-align: center;
+  display: block;
 }
 .assignment {
   font-family: 'Jost';
@@ -163,4 +162,67 @@
   flex: 1 0 auto;
   max-width: 100%;
   display: flex;
+}
+.containerimg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed #ff868e;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+.containerimgWrong {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fbe0dc;
+  background: #fbe0dc;
+  border: 2px dashed #ff868e;
+  border-radius: 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notice {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #8c8c8c;
+}
+.noticeIcon {
+  background-image: url('./img/delet.svg');
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.noticeIconCorrect {
+  background-image: url('./img/add.svg');
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.message {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-top: 18px;
+  padding-right: 19px;
+}
+.containerForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main {
+  padding-top: 10%;
 }
