@@ -34,50 +34,45 @@ const optionsLimit = [
   { value: 20, label: '20 items per page' },
 ];
 const Gallery = ({ getGalleryFavourites }) => {
-  const [orderValue, setOrderValue] = useState(null);
-  const [typeImg, setTypeImg] = useState(null);
-  const [breedId, setBreedId] = useState(null);
+  const [orderValue, setOrderValue] = useState('Random');
+  const [typeImg, setTypeImg] = useState('');
+  const [breedId, setBreedId] = useState('');
   const [listBreeds, setListBreeds] = useState([]);
   const [listBreedsDefaultClean, setListBreedsDefaultClean] = useState([]);
-  const [selectedBreedsQuantity, setSelectedBreedsQuantity] = useState(null);
+  const [selectedBreedsQuantity, setSelectedBreedsQuantity] = useState(5);
   const [conditionButton, setConditionButton] = useState(false);
   const [deletedPage, setDeletedPage] = useState(false);
-  const [page, setPage] = useState(null);
+  const [page, setPage] = useState(0);
   const [open, setOpen] = useState(false);
-  const [update, setUpdate] = useState(null);
+  const [update, setUpdate] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
     if (
-      page === null &&
-      selectedBreedsQuantity === null &&
-      typeImg === null &&
-      breedId === null &&
-      orderValue === null &&
-      update === null
+      page === 0 &&
+      selectedBreedsQuantity === 5 &&
+      typeImg === '' &&
+      breedId === '' &&
+      orderValue === 'Random'
     ) {
       getCatsBreeds().then(data => setListBreeds(data));
 
-      getCatsGallery(5, '', 'Random', 0, '')
+      getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
         .then(data => getFlatArray(data))
         .then(data => {
           setListBreedsDefaultClean(data);
         });
       setConditionButton(false);
-      setPage(0);
-      setSelectedBreedsQuantity(5);
-      setTypeImg('');
-      setBreedId('');
-      setOrderValue('Random');
-      setUpdate(false);
+      // setPage(0);
+      // setSelectedBreedsQuantity(5);
+      // setTypeImg('');
+      // setBreedId('');
+      // setOrderValue('Random');
+      // setUpdate(false);
     }
     if (
-      (!typeImg ||
-        !breedId ||
-        !orderValue ||
-        !page ||
-        !selectedBreedsQuantity) &&
-      update === true
+      (!typeImg || !breedId || !orderValue || !selectedBreedsQuantity) &&
+      page !== 0
     ) {
       getCatsGallery(
         selectedBreedsQuantity,
@@ -99,12 +94,11 @@ const Gallery = ({ getGalleryFavourites }) => {
       });
     }
     if (
-      (!typeImg ||
-        !breedId ||
-        !orderValue ||
-        !page ||
-        !selectedBreedsQuantity) &&
-      update === false
+      (typeImg !== '' ||
+        breedId !== '' ||
+        orderValue !== 'Random' ||
+        selectedBreedsQuantity !== 5) &&
+      page === 0
     ) {
       getCatsGallery(
         selectedBreedsQuantity,
@@ -116,13 +110,40 @@ const Gallery = ({ getGalleryFavourites }) => {
         if (data.length === selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(false);
+          setUpdate(false);
         }
         if (data.length !== selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(true);
+          setUpdate(false);
         }
       });
     }
+    // if (
+    //   (!typeImg ||
+    //     !breedId ||
+    //     !orderValue ||
+    //     !page ||
+    //     !selectedBreedsQuantity) &&
+    //   update === false
+    // ) {
+    //   getCatsGallery(
+    //     selectedBreedsQuantity,
+    //     typeImg,
+    //     orderValue,
+    //     page,
+    //     breedId
+    //   ).then(data => {
+    //     if (data.length === selectedBreedsQuantity) {
+    //       setListBreedsDefaultClean([...getFlatArray(data)]);
+    //       setConditionButton(false);
+    //     }
+    //     if (data.length !== selectedBreedsQuantity) {
+    //       setListBreedsDefaultClean([...getFlatArray(data)]);
+    //       setConditionButton(true);
+    //     }
+    //   });
+    // }
 
     if (update === true) {
       setOrderValue('');
