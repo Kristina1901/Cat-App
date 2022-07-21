@@ -288,7 +288,33 @@ const Breeds = () => {
             </div>
           </header>
           <div className={s.commonMark}>
-            <Form />
+            <div className={s.wrapperForm}>
+              <Form />
+              <div className={s.thumbLinks}>
+                <Link
+                  to={'../likes'}
+                  state={{ from: location }}
+                  className={s.grade}
+                >
+                  <div className={s.gradeSmile}></div>
+                </Link>
+                <Link
+                  to={'../favourites'}
+                  state={{ from: location }}
+                  className={s.grade}
+                >
+                  <div className={s.gradeHeart}></div>
+                </Link>
+                <Link
+                  to={'../dislikes'}
+                  state={{ from: location }}
+                  className={s.grade}
+                >
+                  <div className={s.gradeSad}></div>
+                </Link>
+              </div>
+            </div>
+
             <div className={s.sectionBreeds}>
               <div className={s.navlink}>
                 <button className={s.back} onClick={onGoBack}>
