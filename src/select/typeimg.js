@@ -75,7 +75,6 @@ const typeimg = {
     color: '#1D1D1D',
     position: 'relative',
     top: '25%',
-    right: '-10%',
   }),
 };
 

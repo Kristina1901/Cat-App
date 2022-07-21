@@ -13,7 +13,7 @@ import breeds from '../Logo/img/breeds.png';
 import gallery from '../Logo/img/gallery.png';
 import Form from 'components/Form/Form';
 import styles from '../Logo/Logo.module.css';
-const Voting = () => {
+const Voting = ({ changeLikes, changeFavourites, changeDislikes }) => {
   const [cat, setCat] = useState('');
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ const Voting = () => {
       pic: smile_green,
     };
     setItems(previtems => [item, ...previtems]);
+    changeLikes(cat);
   };
   const addItemFavoritesList = () => {
     const item = {
@@ -54,6 +55,7 @@ const Voting = () => {
       pic: heart_red,
     };
     setItems(previtems => [item, ...previtems]);
+    changeFavourites(cat);
   };
   const addItemDislikedList = () => {
     const item = {
@@ -64,6 +66,7 @@ const Voting = () => {
       pic: sad_yellow,
     };
     setItems(previtems => [item, ...previtems]);
+    changeDislikes(cat);
   };
   const newFetch = () => {
     let promise = new Promise(function (resolve) {
@@ -119,7 +122,32 @@ const Voting = () => {
           </div>
         </header>
         <div className={s.commonMark}>
-          <Form />
+          <div className={s.wrapperForm}>
+            <Form />
+            <div className={s.thumbLinks}>
+              <Link
+                to={'../likes'}
+                state={{ from: location }}
+                className={s.grade}
+              >
+                <div className={s.gradeSmile}></div>
+              </Link>
+              <Link
+                to={'../favourites'}
+                state={{ from: location }}
+                className={s.grade}
+              >
+                <div className={s.gradeHeart}></div>
+              </Link>
+              <Link
+                to={'../dislikes'}
+                state={{ from: location }}
+                className={s.grade}
+              >
+                <div className={s.gradeSad}></div>
+              </Link>
+            </div>
+          </div>
           <div className={s.sectionVoting}>
             <div className={s.navlink}>
               <button className={s.back} onClick={onGoBack}>
