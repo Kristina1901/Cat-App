@@ -33,7 +33,7 @@ const optionsLimit = [
   { value: 15, label: '15 items per page' },
   { value: 20, label: '20 items per page' },
 ];
-const Gallery = () => {
+const Gallery = ({ getGalleryFavourites }) => {
   const [orderValue, setOrderValue] = useState(null);
   const [typeImg, setTypeImg] = useState(null);
   const [breedId, setBreedId] = useState(null);
@@ -44,6 +44,7 @@ const Gallery = () => {
   const [deletedPage, setDeletedPage] = useState(false);
   const [page, setPage] = useState(null);
   const [open, setOpen] = useState(false);
+  const [update, setUpdate] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -52,7 +53,8 @@ const Gallery = () => {
       selectedBreedsQuantity === null &&
       typeImg === null &&
       breedId === null &&
-      orderValue === null
+      orderValue === null &&
+      update === null
     ) {
       getCatsBreeds().then(data => setListBreeds(data));
 
@@ -66,14 +68,43 @@ const Gallery = () => {
       setSelectedBreedsQuantity(5);
       setTypeImg('');
       setBreedId('');
-      setOrderValue('');
+      setOrderValue('Random');
+      setUpdate(false);
     }
     if (
-      !typeImg ||
-      !breedId ||
-      !orderValue ||
-      !page ||
-      !selectedBreedsQuantity
+      (!typeImg ||
+        !breedId ||
+        !orderValue ||
+        !page ||
+        !selectedBreedsQuantity) &&
+      update === true
+    ) {
+      getCatsGallery(
+        selectedBreedsQuantity,
+        typeImg,
+        orderValue,
+        page,
+        breedId
+      ).then(data => {
+        if (data.length === selectedBreedsQuantity) {
+          setListBreedsDefaultClean([...getFlatArray(data)]);
+          setConditionButton(false);
+          setUpdate(false);
+        }
+        if (data.length !== selectedBreedsQuantity) {
+          setListBreedsDefaultClean([...getFlatArray(data)]);
+          setConditionButton(true);
+          setUpdate(false);
+        }
+      });
+    }
+    if (
+      (!typeImg ||
+        !breedId ||
+        !orderValue ||
+        !page ||
+        !selectedBreedsQuantity) &&
+      update === false
     ) {
       getCatsGallery(
         selectedBreedsQuantity,
@@ -92,22 +123,10 @@ const Gallery = () => {
         }
       });
     }
-    // if (
-    //   page === 0 &&
-    //   (!typeImg || !breedId || !orderValue || !page || !selectedBreedsQuantity)
-    // ) {
-    //   getCatsGallery(5, typeImg, orderValue, page, breedId).then(data => {
-    //     if (data.length === selectedBreedsQuantity) {
-    //       setListBreedsDefaultClean([...getFlatArray(data)]);
-    //       setConditionButton(false);
-    //     }
-    //     if (data.length !== selectedBreedsQuantity) {
-    //       setListBreedsDefaultClean([...getFlatArray(data)]);
-    //       setConditionButton(true);
-    //     }
-    //   });
-    // }
 
+    if (update === true) {
+      setOrderValue('');
+    }
     if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === true) {
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
       let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
@@ -164,7 +183,15 @@ const Gallery = () => {
         setConditionButton(false);
       });
     }
-  }, [selectedBreedsQuantity, page, deletedPage, orderValue, breedId, typeImg]);
+  }, [
+    selectedBreedsQuantity,
+    page,
+    deletedPage,
+    orderValue,
+    breedId,
+    typeImg,
+    update,
+  ]);
   const onGoBack = () => {
     navigate(location?.state?.from ?? '/');
   };
@@ -221,11 +248,20 @@ const Gallery = () => {
     gridTemplateRows: `repeat(${cheakGreeds()}, 62px)`,
     gridGap: '20px',
   };
+  const FilterArray = img => {
+    let array = listBreedsDefaultClean.find(item => item.id === img);
+    getGalleryFavourites(array);
+  };
   let renderList = null;
 
-  renderList = listBreedsDefaultClean.map(({ url, id }) => (
+  renderList = listBreedsDefaultClean.map(({ id, url }) => (
     <li key={id} className={s.gridContainerItem}>
-      <div className={s.modalName}></div>
+      <div className={s.modalName}>
+        <button
+          className={s.buttonLike}
+          onClick={() => FilterArray(id)}
+        ></button>
+      </div>
       <img src={url} alt="cat" className={s.gridContainerImg} />
     </li>
   ));
@@ -278,7 +314,32 @@ const Gallery = () => {
             </div>
           </header>
           <div className={s.commonMark}>
-            <Form />
+            <div className={s.wrapperForm}>
+              <Form />
+              <div className={s.thumbLinks}>
+                <Link
+                  to={'../likes'}
+                  state={{ from: location }}
+                  className={s.grade}
+                >
+                  <div className={s.gradeSmile}></div>
+                </Link>
+                <Link
+                  to={'../favourites'}
+                  state={{ from: location }}
+                  className={s.grade}
+                >
+                  <div className={s.gradeHeart}></div>
+                </Link>
+                <Link
+                  to={'../dislikes'}
+                  state={{ from: location }}
+                  className={s.grade}
+                >
+                  <div className={s.gradeSad}></div>
+                </Link>
+              </div>
+            </div>
             <div className={s.sectionBreeds}>
               <div className={s.navlink}>
                 <button className={s.back} onClick={onGoBack}>
@@ -336,7 +397,10 @@ const Gallery = () => {
                       placeholder="All"
                     />
                   </div>
-                  <button className={s.arrowUpload}></button>
+                  <button
+                    className={s.arrowUpload}
+                    onClick={() => setUpdate(true)}
+                  ></button>
                 </div>
               </div>
               <div className={s.gridContainerWidth}>
