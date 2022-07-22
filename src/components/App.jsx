@@ -29,8 +29,9 @@ export const App = () => {
     setFavourites(previtems => [...previtems, value].flat());
   };
   const changeValue = item => {
-    setValue(previtems => [...previtems, value].flat());
+    setValue(item);
   };
+
   return (
     <>
       <Suspense fallback={<Loader />}>
@@ -40,24 +41,60 @@ export const App = () => {
           <Route
             path="/voting"
             element={
-              <Voting
-                changeLikes={changeLikes}
-                changeFavourites={changeFavourites}
-                changeDislikes={changeDislikes}
-              />
+              value === '' ? (
+                <Voting
+                  changeLikes={changeLikes}
+                  changeFavourites={changeFavourites}
+                  changeDislikes={changeDislikes}
+                  changeValue={changeValue}
+                />
+              ) : (
+                <Navigate to="/search" />
+              )
             }
           />
-          <Route path="/breeds" element={<Breeds />} />
-          <Route path="/breeds/breedsDetails/:id" element={<BreedsDetails />} />
+          <Route
+            path="/breeds"
+            element={
+              value === '' ? (
+                <Breeds changeValue={changeValue} />
+              ) : (
+                <Navigate to="/search" />
+              )
+            }
+          />
+          <Route
+            path="/breeds/breedsDetails/:id"
+            element={
+              value === '' ? (
+                <BreedsDetails changeValue={changeValue} />
+              ) : (
+                <Navigate to="/search" />
+              )
+            }
+          />
           <Route
             path="/gallery"
-            element={<Gallery getGalleryFavourites={getGalleryFavourites} />}
+            element={
+              value === '' ? (
+                <Gallery
+                  getGalleryFavourites={getGalleryFavourites}
+                  changeValue={changeValue}
+                />
+              ) : (
+                <Navigate to="/search" />
+              )
+            }
           />
           <Route path="/likes" element={<Likes likes={likes} />} />
           <Route path="/dislikes" element={<Dislikes dislikes={dislikes} />} />
           <Route
             path="/favourites"
             element={<Favourites favourites={favourites} />}
+          />
+          <Route
+            path="/search"
+            element={<Search value={value} changeValue={changeValue} />}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

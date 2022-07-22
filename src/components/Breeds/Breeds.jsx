@@ -21,7 +21,7 @@ const options = [
   { value: 15, label: 'Limit: 15' },
   { value: 20, label: 'Limit: 20' },
 ];
-const Breeds = () => {
+const Breeds = ({ changeValue }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [listBreeds, setListBreeds] = useState([]);
   const [listBreedsDefaultClean, setListBreedsDefaultClean] = useState([]);
@@ -309,7 +309,7 @@ const Breeds = () => {
           </header>
           <div className={s.commonMark}>
             <div className={s.wrapperForm}>
-              <Form />
+              <Form changeValue={changeValue} />
               <div className={s.thumbLinks}>
                 <Link
                   to={'../likes'}

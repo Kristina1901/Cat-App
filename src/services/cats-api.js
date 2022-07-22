@@ -88,3 +88,29 @@ export async function register(cat) {
 
   return response.json();
 }
+export async function searchByname(word) {
+  const { data } = await axios.get(
+    `https://api.thecatapi.com/v1/breeds/search?q=${word}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': '17d94b92-754f-46eb-99a0-65be65b5d18f',
+      },
+    }
+  );
+
+  return data;
+}
+export async function getImage(id) {
+  const { data } = await axios.get(
+    `https://api.thecatapi.com/v1/images/search?breed_id=${id}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': '17d94b92-754f-46eb-99a0-65be65b5d18f',
+      },
+    }
+  );
+
+  return data;
+}

@@ -10,7 +10,7 @@ import Form from 'components/Form/Form';
 import styles from '../Logo/Logo.module.css';
 import Loader from 'components/Loader/Loader';
 import { getCatsBreedsImage } from '../../services/cats-api';
-const BreedsDetails = () => {
+const BreedsDetails = ({ changeValue }) => {
   const [breed, setBreed] = useState([]);
   const [page, setPage] = useState(0);
   const [img, setImg] = useState('');
@@ -94,7 +94,7 @@ const BreedsDetails = () => {
         </header>
         <div className={s.commonMark}>
           <div className={s.wrapperForm}>
-            <Form />
+            <Form changeValue={changeValue} />
             <div className={s.thumbLinks}>
               <Link
                 to={'../likes'}

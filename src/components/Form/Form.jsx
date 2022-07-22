@@ -1,17 +1,35 @@
 import s from './Form.module.css';
-import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import glass from './img/glass.svg';
-const Form = () => {
-  const location = useLocation();
+const Form = ({ changeValue, activeLink }) => {
+  const [breedName, setBreedName] = useState('');
+  const handleNameChange = event => {
+    setBreedName(event.target.value.toLowerCase());
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    if (breedName.trim() === '') {
+      alert('Enter a keyword to search!');
+      return;
+    }
+
+    changeValue(breedName);
+  };
+
   return (
-    <form className={s.form} id="form">
+    <form
+      className={activeLink === true ? s.styleform : s.form}
+      id="form"
+      onSubmit={handleSubmit}
+    >
       <input
         className={s.searching}
         type="text"
         autoComplete="off"
         placeholder="Search for breeds by name"
         name="breeds"
-        // onChange={handleInputChange}
+        onChange={handleNameChange}
       />
       <button type="submit" className={s.buttonSubmit}>
         <img src={glass} alt="glass" />

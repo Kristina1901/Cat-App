@@ -14,7 +14,12 @@ import gallery from '../Logo/img/gallery.png';
 import Form from 'components/Form/Form';
 import styles from '../Logo/Logo.module.css';
 import Loader from 'components/Loader/Loader';
-const Voting = ({ changeLikes, changeFavourites, changeDislikes }) => {
+const Voting = ({
+  changeLikes,
+  changeFavourites,
+  changeDislikes,
+  changeValue,
+}) => {
   const [cat, setCat] = useState('');
   const [items, setItems] = useState([]);
   const [pending, setPending] = useState(false);
@@ -134,7 +139,7 @@ const Voting = ({ changeLikes, changeFavourites, changeDislikes }) => {
         </header>
         <div className={s.commonMark}>
           <div className={s.wrapperForm}>
-            <Form />
+            <Form changeValue={changeValue} />
             <div className={s.thumbLinks}>
               <Link
                 to={'../likes'}

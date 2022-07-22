@@ -786,3 +786,21 @@
   width: 640px;
   height: 380px;
 }
+.searchText {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
+  color: #8c8c8c;
+  margin: 0;
+  margin-top: 20px;
+}
+.value {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
+  color: #1d1d1d;
+}
