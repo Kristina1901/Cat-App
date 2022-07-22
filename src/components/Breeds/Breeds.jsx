@@ -152,8 +152,8 @@ const Breeds = () => {
       });
     }
     if (selectedOption !== null) {
-      let arrayByname = listBreeds.filter(item => item.name === selectedOption);
-      setselectedBreedsArray(arrayByname);
+      // let arrayByname = listBreeds.filter(item => item.name === selectedOption);
+      setselectedBreedsArray(selectedOption);
     }
   }, [selectedBreedsQuantity, page, deletedPage, selectedOption]);
   const onGoBack = () => {
