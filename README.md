@@ -2,5 +2,5 @@
 the page https://ktuz-catapp.netlify.app/breeds.
 
 1. To run a project with files, download the files, install the project's base
-   dependencies with the `npm install`command.
+   dependencies with the <br>`npm install`command.
 2. Start development mode by running `npm start`command.
