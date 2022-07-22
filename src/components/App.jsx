@@ -10,10 +10,12 @@ const Gallery = lazy(() => import('./Gallery'));
 const Likes = lazy(() => import('./Likes'));
 const Dislikes = lazy(() => import('./Dislikes'));
 const Favourites = lazy(() => import('./Favourites'));
+const Search = lazy(() => import('./Search'));
 export const App = () => {
   const [likes, setLikes] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const [dislikes, setDislikes] = useState([]);
+  const [value, setValue] = useState('');
   const changeLikes = value => {
     setLikes(previtems => [...previtems, value].flat());
   };
@@ -26,7 +28,9 @@ export const App = () => {
   const getGalleryFavourites = value => {
     setFavourites(previtems => [...previtems, value].flat());
   };
-
+  const changeValue = item => {
+    setValue(previtems => [...previtems, value].flat());
+  };
   return (
     <>
       <Suspense fallback={<Loader />}>
