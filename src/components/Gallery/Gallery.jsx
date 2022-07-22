@@ -252,11 +252,11 @@ const Gallery = ({ getGalleryFavourites }) => {
     navigate(location?.state?.from ?? '/');
   };
   function getBreedsName() {
-    let k = { label: 'None', value: '' };
+    let none = { label: 'None', value: '' };
     let options = listBreeds.map(item => {
       return { label: item.name, value: item.id };
     });
-    return [k, ...options];
+    return [none, ...options];
   }
   function getFlatArray(array) {
     let cleanArray = array.filter(item => item.hasOwnProperty('url') === true);
