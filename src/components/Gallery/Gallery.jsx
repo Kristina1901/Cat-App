@@ -45,7 +45,7 @@ const Gallery = ({ getGalleryFavourites }) => {
   const [deletedPage, setDeletedPage] = useState(false);
   const [page, setPage] = useState(0);
   const [open, setOpen] = useState(false);
-  const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState(null);
   const [pending, setPending] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -55,7 +55,28 @@ const Gallery = ({ getGalleryFavourites }) => {
       selectedBreedsQuantity === 5 &&
       typeImg === '' &&
       breedId === '' &&
-      orderValue === 'Random'
+      orderValue === 'Random' &&
+      update === null
+    ) {
+      setPending(true);
+      getCatsBreeds().then(data => setListBreeds(data));
+
+      getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
+        .then(data => getFlatArray(data))
+        .then(data => {
+          setListBreedsDefaultClean(data);
+          setPending(false);
+        });
+      setConditionButton(false);
+      setUpdate(false);
+    }
+    if (
+      (selectedBreedsQuantity !== 5 ||
+        typeImg !== '' ||
+        breedId !== '' ||
+        orderValue !== 'Random') &&
+      page === 0 &&
+      update === false
     ) {
       setPending(true);
       getCatsBreeds().then(data => setListBreeds(data));
@@ -93,13 +114,8 @@ const Gallery = ({ getGalleryFavourites }) => {
         setPending(false);
       });
     }
-    if (
-      (typeImg !== '' ||
-        breedId !== '' ||
-        orderValue !== 'Random' ||
-        selectedBreedsQuantity !== 5) &&
-      page === 0
-    ) {
+
+    if (orderValue === '' && update === true) {
       setPending(true);
       getCatsGallery(
         selectedBreedsQuantity,
@@ -111,14 +127,14 @@ const Gallery = ({ getGalleryFavourites }) => {
         if (data.length === selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(false);
-          setUpdate(false);
         }
         if (data.length !== selectedBreedsQuantity) {
           setListBreedsDefaultClean([...getFlatArray(data)]);
           setConditionButton(true);
-          setUpdate(false);
         }
+        setUpdate(false);
         setPending(false);
+        setOrderValue('Random');
       });
     }
 
