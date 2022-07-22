@@ -488,9 +488,9 @@ const Gallery = ({ getGalleryFavourites }) => {
               </div>
             </div>
           </div>
-          <Modal trigger={open} onClose={closeModal} />
         </div>
       </div>
+      <Modal trigger={open} onClose={closeModal} />
     </>
   );
 };

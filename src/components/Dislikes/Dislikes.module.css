@@ -195,17 +195,6 @@
   grid-row-end: 25;
 }
 
-.mainWrapper {
-  padding-top: 30px;
-  padding-left: 133px;
-  padding-right: 30px;
-  padding-bottom: 18px;
-}
-.wrapper {
-  display: flex;
-  background: #e5e5e5;
-  justify-content: space-between;
-}
 .buttonSubmit {
   padding: 10px;
   background: #fbe0dc;
@@ -518,9 +507,9 @@
   border: none;
   background: #ff868e;
   border-radius: 20px;
-  margin-right: 10px;
   display: block;
 }
+
 .nofound {
   font-family: 'Jost';
   font-style: normal;
