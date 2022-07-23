@@ -1,5 +1,6 @@
 import { getCatsBreeds } from '../../services/cats-api';
 import { getCatsBreedsImg } from '../../services/cats-api';
+import { getBreedId } from '../../services/cats-api';
 import { useState, useEffect } from 'react';
 import customStylesGrids from '../../select/selectStylesGrids';
 import Logo from 'components/Logo/Logo';
@@ -21,7 +22,7 @@ const options = [
   { value: 15, label: 'Limit: 15' },
   { value: 20, label: 'Limit: 20' },
 ];
-const Breeds = ({ changeValue }) => {
+const Breeds = ({ changeQuery }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [listBreeds, setListBreeds] = useState([]);
   const [listBreedsDefaultClean, setListBreedsDefaultClean] = useState([]);
@@ -153,16 +154,21 @@ const Breeds = ({ changeValue }) => {
     }
     if (selectedOption !== null) {
       // let arrayByname = listBreeds.filter(item => item.name === selectedOption);
-      setselectedBreedsArray(selectedOption);
+      // setselectedBreedsArray(arrayByname);
+
+      getBreedId(selectedBreedsQuantity, page, selectedOption).then(data => {
+        setselectedBreedsArray(data);
+        setPending(false);
+      });
+      setConditionButton(false);
     }
   }, [selectedBreedsQuantity, page, deletedPage, selectedOption]);
   const onGoBack = () => {
     navigate(location?.state?.from ?? '/');
   };
   function getBreedsName() {
-    let array = listBreeds.map(item => item.name);
-    let options = array.map(item => {
-      return { label: item, value: item };
+    let options = listBreeds.map(item => {
+      return { label: item.name, value: item.id };
     });
     return options;
   }
@@ -245,17 +251,17 @@ const Breeds = ({ changeValue }) => {
     ));
   }
   if (selectedBreedsArray.length !== 0) {
-    renderList = selectedBreedsArray.map(({ id, image, name }) => (
+    renderList = selectedBreedsArray.map(({ id, url, breeds }) => (
       <li key={id} className={s.gridContainerItem}>
         <Link
-          to={`./breedsDetails/${id}`}
+          to={`./breedsDetails/${breeds[0].id}`}
           state={{ from: location }}
           className={s.link}
         >
           <div className={s.modalName}>
-            <div className={s.modalNameBreed}>{name}</div>
+            <div className={s.modalNameBreed}>{breeds[0].name}</div>
           </div>
-          <img src={image.url} alt="cat" className={s.gridContainerImg} />
+          <img src={url} alt="cat" className={s.gridContainerImg} />
         </Link>
       </li>
     ));
@@ -309,7 +315,7 @@ const Breeds = ({ changeValue }) => {
           </header>
           <div className={s.commonMark}>
             <div className={s.wrapperForm}>
-              <Form changeValue={changeValue} />
+              <Form changeQuery={changeQuery} />
               <div className={s.thumbLinks}>
                 <Link
                   to={'../likes'}

@@ -114,3 +114,16 @@ export async function getImage(id) {
 
   return data;
 }
+export async function getBreedId(limit, page, breed) {
+  const { data } = await axios.get(
+    `https://api.thecatapi.com/v1/images/search?limit=${limit}&size=small&page=${page}&breed_id=${breed}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': '17d94b92-754f-46eb-99a0-65be65b5d18f',
+      },
+    }
+  );
+
+  return data;
+}
