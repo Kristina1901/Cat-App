@@ -10,7 +10,7 @@ function Drop() {
   const [loading, setLoading] = useState(false);
   const [notice, setNotice] = useState(null);
   const [button, setButton] = useState('');
-  const [background, setBackground] = useState(false);
+  const [background, setBackground] = useState(null);
   const inputRef = useRef(null);
   useEffect(() => {
     if (photo === null && loading === false && notice === false) {
@@ -149,10 +149,10 @@ function Drop() {
               className={s.dragFileElement}
             ></div>
           )}
-          {photo !== null && background !== true && (
+          {photo !== null && (background === null || background === false) && (
             <div
               className={
-                background !== true ? s.containerimgWrong : s.containerimg
+                background === false ? s.containerimgWrong : s.containerimg
               }
             >
               <img
