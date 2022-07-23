@@ -7,7 +7,7 @@ import breeds from '../Logo/img/breeds.png';
 import gallery from '../Logo/img/gallery.png';
 import s from './Likes.module.css';
 import Form from 'components/Form/Form';
-const Likes = ({ likes }) => {
+const Likes = ({ likes, changeQuery }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const onGoBack = () => {
@@ -96,7 +96,7 @@ const Likes = ({ likes }) => {
           </header>
           <div className={s.commonMark}>
             <div className={s.wrapperForm}>
-              <Form />
+              <Form changeQuery={changeQuery} />
               <div className={s.thumbLinks}>
                 <Link
                   to={'#'}

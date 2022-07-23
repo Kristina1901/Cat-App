@@ -17,7 +17,7 @@ export const App = () => {
   const [likes, setLikes] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const [dislikes, setDislikes] = useState([]);
-  const [value, setValue] = useState('');
+  const [query, setQuery] = useState('');
   const changeLikes = value => {
     setLikes(previtems => [...previtems, value].flat());
   };
@@ -30,8 +30,8 @@ export const App = () => {
   const getGalleryFavourites = value => {
     setFavourites(previtems => [...previtems, value].flat());
   };
-  const changeValue = item => {
-    setValue(item);
+  const changeQuery = item => {
+    setQuery(item);
     navigate('/search');
   };
 
@@ -48,34 +48,42 @@ export const App = () => {
                 changeLikes={changeLikes}
                 changeFavourites={changeFavourites}
                 changeDislikes={changeDislikes}
-                changeValue={changeValue}
+                changeQuery={changeQuery}
               />
             }
           />
           <Route
             path="/breeds"
-            element={<Breeds changeValue={changeValue} />}
+            element={<Breeds changeQuery={changeQuery} />}
           />
           <Route
             path="/breeds/breedsDetails/:id"
-            element={<BreedsDetails changeValue={changeValue} />}
+            element={<BreedsDetails changeQuery={changeQuery} />}
           />
           <Route
             path="/gallery"
             element={
               <Gallery
                 getGalleryFavourites={getGalleryFavourites}
-                changeValue={changeValue}
+                changeQuery={changeQuery}
               />
             }
           />
-          <Route path="/likes" element={<Likes likes={likes} />} />
-          <Route path="/dislikes" element={<Dislikes dislikes={dislikes} />} />
+          <Route
+            path="/likes"
+            element={<Likes likes={likes} changeQuery={changeQuery} />}
+          />
+          <Route
+            path="/dislikes"
+            element={<Dislikes dislikes={dislikes} changeQuery={changeQuery} />}
+          />
           <Route
             path="/favourites"
-            element={<Favourites favourites={favourites} />}
+            element={
+              <Favourites favourites={favourites} changeQuery={changeQuery} />
+            }
           />
-          <Route path="/search" element={<Search value={value} />} />
+          <Route path="/search" element={<Search query={query} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>

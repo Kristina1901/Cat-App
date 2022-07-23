@@ -18,7 +18,7 @@ const Voting = ({
   changeLikes,
   changeFavourites,
   changeDislikes,
-  changeValue,
+  changeQuery,
 }) => {
   const [cat, setCat] = useState('');
   const [items, setItems] = useState([]);
@@ -139,7 +139,7 @@ const Voting = ({
         </header>
         <div className={s.commonMark}>
           <div className={s.wrapperForm}>
-            <Form changeValue={changeValue} />
+            <Form changeQuery={changeQuery} />
             <div className={s.thumbLinks}>
               <Link
                 to={'../likes'}

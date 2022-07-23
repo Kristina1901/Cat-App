@@ -34,7 +34,7 @@ const optionsLimit = [
   { value: 15, label: '15 items per page' },
   { value: 20, label: '20 items per page' },
 ];
-const Gallery = ({ getGalleryFavourites, changeValue }) => {
+const Gallery = ({ getGalleryFavourites, changeQuery }) => {
   const [orderValue, setOrderValue] = useState('Random');
   const [typeImg, setTypeImg] = useState('');
   const [breedId, setBreedId] = useState('');
@@ -371,7 +371,7 @@ const Gallery = ({ getGalleryFavourites, changeValue }) => {
           </header>
           <div className={s.commonMark}>
             <div className={s.wrapperForm}>
-              <Form changeValue={changeValue} />
+              <Form changeQuery={changeQuery} />
               <div className={s.thumbLinks}>
                 <Link
                   to={'../likes'}

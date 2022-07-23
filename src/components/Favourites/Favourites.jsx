@@ -8,7 +8,7 @@ import gallery from '../Logo/img/gallery.png';
 import s from './Favourites.module.css';
 import Form from 'components/Form/Form';
 
-const Favourites = ({ favourites }) => {
+const Favourites = ({ favourites, changeQuery }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const onGoBack = () => {
@@ -103,7 +103,7 @@ const Favourites = ({ favourites }) => {
           </header>
           <div className={s.commonMark}>
             <div className={s.wrapperForm}>
-              <Form />
+              <Form changeQuery={changeQuery} />
               <div className={s.thumbLinks}>
                 <Link
                   to={'../likes'}

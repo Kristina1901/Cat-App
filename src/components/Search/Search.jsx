@@ -12,18 +12,18 @@ import s from './Search.module.css';
 import Form from 'components/Form/Form';
 import Loader from 'components/Loader/Loader';
 
-const Search = ({ value }) => {
+const Search = ({ query }) => {
   const [pending, setPending] = useState(false);
   const [img, setImg] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
-    if (value === '') {
+    if (query === '') {
       return;
     }
-    if (value !== '') {
+    if (query !== '') {
       setPending(true);
-      searchByname(value).then(data => {
+      searchByname(query).then(data => {
         const arr = getBreedsId(data);
 
         let k = arr.map(item => getImage(item));
@@ -38,7 +38,7 @@ const Search = ({ value }) => {
         setPending(false);
       });
     }
-  }, [value]);
+  }, [query]);
   const onGoBack = () => {
     navigate(location?.state?.from ?? '/');
   };
@@ -103,7 +103,7 @@ const Search = ({ value }) => {
           </header>
           <div className={s.commonMark}>
             <div className={s.wrapperForm}>
-              <Form activeLink={true} value={value} />
+              <Form activeLink={true} query={query} />
               <div className={s.thumbLinks}>
                 <Link
                   to={'../likes'}
@@ -137,7 +137,7 @@ const Search = ({ value }) => {
                 <div className={s.linkActive}>Search</div>
               </div>
               <p className={s.searchText}>
-                Search results for:<span className={s.value}> {value}</span>
+                Search results for:<span className={s.value}> {query}</span>
               </p>
               <div className={s.gridContainerWidth}>
                 {pending === false ? (
