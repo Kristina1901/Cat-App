@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Loader from './Loader/Loader';
 
 const HomePage = lazy(() => import('./HomePage'));
@@ -12,6 +12,8 @@ const Dislikes = lazy(() => import('./Dislikes'));
 const Favourites = lazy(() => import('./Favourites'));
 const Search = lazy(() => import('./Search'));
 export const App = () => {
+  const navigate = useNavigate();
+
   const [likes, setLikes] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const [dislikes, setDislikes] = useState([]);
@@ -30,6 +32,7 @@ export const App = () => {
   };
   const changeValue = item => {
     setValue(item);
+    navigate('/search');
   };
 
   return (
@@ -41,49 +44,29 @@ export const App = () => {
           <Route
             path="/voting"
             element={
-              value === '' ? (
-                <Voting
-                  changeLikes={changeLikes}
-                  changeFavourites={changeFavourites}
-                  changeDislikes={changeDislikes}
-                  changeValue={changeValue}
-                />
-              ) : (
-                <Navigate to="/search" />
-              )
+              <Voting
+                changeLikes={changeLikes}
+                changeFavourites={changeFavourites}
+                changeDislikes={changeDislikes}
+                changeValue={changeValue}
+              />
             }
           />
           <Route
             path="/breeds"
-            element={
-              value === '' ? (
-                <Breeds changeValue={changeValue} />
-              ) : (
-                <Navigate to="/search" />
-              )
-            }
+            element={<Breeds changeValue={changeValue} />}
           />
           <Route
             path="/breeds/breedsDetails/:id"
-            element={
-              value === '' ? (
-                <BreedsDetails changeValue={changeValue} />
-              ) : (
-                <Navigate to="/search" />
-              )
-            }
+            element={<BreedsDetails changeValue={changeValue} />}
           />
           <Route
             path="/gallery"
             element={
-              value === '' ? (
-                <Gallery
-                  getGalleryFavourites={getGalleryFavourites}
-                  changeValue={changeValue}
-                />
-              ) : (
-                <Navigate to="/search" />
-              )
+              <Gallery
+                getGalleryFavourites={getGalleryFavourites}
+                changeValue={changeValue}
+              />
             }
           />
           <Route path="/likes" element={<Likes likes={likes} />} />
@@ -92,10 +75,7 @@ export const App = () => {
             path="/favourites"
             element={<Favourites favourites={favourites} />}
           />
-          <Route
-            path="/search"
-            element={<Search value={value} changeValue={changeValue} />}
-          />
+          <Route path="/search" element={<Search value={value} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>

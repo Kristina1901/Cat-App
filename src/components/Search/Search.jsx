@@ -12,7 +12,7 @@ import s from './Search.module.css';
 import Form from 'components/Form/Form';
 import Loader from 'components/Loader/Loader';
 
-const Search = ({ value, changeValue }) => {
+const Search = ({ value }) => {
   const [pending, setPending] = useState(false);
   const [img, setImg] = useState([]);
   const navigate = useNavigate();
@@ -36,7 +36,6 @@ const Search = ({ value, changeValue }) => {
           });
 
         setPending(false);
-        changeValue('');
       });
     }
   }, [value]);
@@ -80,7 +79,7 @@ const Search = ({ value, changeValue }) => {
                     <img src={breeds} alt="breeds" width="117px" />
                   </div>
                   <Link
-                    to={'#'}
+                    to={'../breeds'}
                     state={{ from: location }}
                     className={styles.link}
                   >
@@ -104,7 +103,7 @@ const Search = ({ value, changeValue }) => {
           </header>
           <div className={s.commonMark}>
             <div className={s.wrapperForm}>
-              <Form activeLink={true} />
+              <Form activeLink={true} value={value} />
               <div className={s.thumbLinks}>
                 <Link
                   to={'../likes'}
