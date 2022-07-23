@@ -1,7 +1,7 @@
 import s from './Form.module.css';
 import { useState } from 'react';
 import glass from './img/glass.svg';
-const Form = ({ changeValue, activeLink }) => {
+const Form = ({ changeValue, activeLink, value }) => {
   const [breedName, setBreedName] = useState('');
   const handleNameChange = event => {
     setBreedName(event.target.value.toLowerCase());
@@ -30,6 +30,7 @@ const Form = ({ changeValue, activeLink }) => {
         placeholder="Search for breeds by name"
         name="breeds"
         onChange={handleNameChange}
+        value={value}
       />
       <button type="submit" className={s.buttonSubmit}>
         <img src={glass} alt="glass" />
