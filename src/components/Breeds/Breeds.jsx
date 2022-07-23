@@ -37,7 +37,7 @@ const Breeds = ({ changeQuery }) => {
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
-    if (page === 0 && selectedBreedsQuantity === 5) {
+    if (page === 0 && selectedBreedsQuantity === 5 && selectedOption == null) {
       setPending(true);
       getCatsBreeds().then(data => setListBreeds(data));
       getCatsBreedsImg(5, 0)
