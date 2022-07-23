@@ -79,7 +79,12 @@ const Breeds = ({ changeQuery }) => {
         setPending(false);
       });
     }
-    if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === true) {
+    if (
+      selectedBreedsQuantity === 10 &&
+      page === 0 &&
+      deletedPage === true &&
+      selectedOption === null
+    ) {
       setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
@@ -91,7 +96,12 @@ const Breeds = ({ changeQuery }) => {
       });
     }
 
-    if (selectedBreedsQuantity === 10 && page === 0 && deletedPage === false) {
+    if (
+      selectedBreedsQuantity === 10 &&
+      page === 0 &&
+      deletedPage === false &&
+      selectedOption === null
+    ) {
       setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
@@ -102,7 +112,12 @@ const Breeds = ({ changeQuery }) => {
         setPending(false);
       });
     }
-    if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === false) {
+    if (
+      selectedBreedsQuantity === 15 &&
+      page === 0 &&
+      deletedPage === false &&
+      selectedOption === null
+    ) {
       setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
@@ -114,7 +129,12 @@ const Breeds = ({ changeQuery }) => {
         setPending(false);
       });
     }
-    if (selectedBreedsQuantity === 15 && page === 0 && deletedPage === true) {
+    if (
+      selectedBreedsQuantity === 15 &&
+      page === 0 &&
+      deletedPage === true &&
+      selectedOption === null
+    ) {
       setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
@@ -126,7 +146,12 @@ const Breeds = ({ changeQuery }) => {
         setPending(false);
       });
     }
-    if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === false) {
+    if (
+      selectedBreedsQuantity === 20 &&
+      page === 0 &&
+      deletedPage === false &&
+      selectedOption === null
+    ) {
       setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
@@ -139,7 +164,12 @@ const Breeds = ({ changeQuery }) => {
         setPending(false);
       });
     }
-    if (selectedBreedsQuantity === 20 && page === 0 && deletedPage === true) {
+    if (
+      selectedBreedsQuantity === 20 &&
+      page === 0 &&
+      deletedPage === true &&
+      selectedOption === null
+    ) {
       setPending(true);
       let arr1 = getCatsBreedsImg(5, 0);
       let arr2 = getCatsBreedsImg(5, 1);
@@ -153,8 +183,7 @@ const Breeds = ({ changeQuery }) => {
       });
     }
     if (selectedOption !== null) {
-      // let arrayByname = listBreeds.filter(item => item.name === selectedOption);
-      // setselectedBreedsArray(arrayByname);
+      setPending(true);
 
       getBreedId(selectedBreedsQuantity, page, selectedOption).then(data => {
         setselectedBreedsArray(data);

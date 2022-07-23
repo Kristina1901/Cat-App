@@ -83,7 +83,10 @@ export const App = () => {
               <Favourites favourites={favourites} changeQuery={changeQuery} />
             }
           />
-          <Route path="/search" element={<Search query={query} />} />
+          <Route
+            path="/search"
+            element={<Search query={query} changeQuery={changeQuery} />}
+          />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>

@@ -12,7 +12,7 @@ import s from './Search.module.css';
 import Form from 'components/Form/Form';
 import Loader from 'components/Loader/Loader';
 
-const Search = ({ query }) => {
+const Search = ({ query, changeQuery }) => {
   const [pending, setPending] = useState(false);
   const [img, setImg] = useState([]);
   const navigate = useNavigate();
@@ -23,13 +23,14 @@ const Search = ({ query }) => {
     }
     if (query !== '') {
       setPending(true);
+      setImg([]);
       searchByname(query).then(data => {
         const arr = getBreedsId(data);
 
         let k = arr.map(item => getImage(item));
         Promise.all(k)
           .then(result => {
-            setImg(result.flat());
+            setImg(prev => [...prev.flat(), ...result.flat()]);
           })
           .catch(error => {
             console.log(error);
@@ -103,7 +104,7 @@ const Search = ({ query }) => {
           </header>
           <div className={s.commonMark}>
             <div className={s.wrapperForm}>
-              <Form activeLink={true} query={query} />
+              <Form activeLink={true} changeQuery={changeQuery} />
               <div className={s.thumbLinks}>
                 <Link
                   to={'../likes'}
@@ -142,8 +143,8 @@ const Search = ({ query }) => {
               <div className={s.gridContainerWidth}>
                 {pending === false ? (
                   <ul style={divStyle}>
-                    {img.map(({ url, id, breeds }) => (
-                      <li key={id} className={s.gridContainerItem}>
+                    {img.map(({ url, breeds }) => (
+                      <li key={nanoid()} className={s.gridContainerItem}>
                         <div className={s.modalName}>
                           <div className={s.modalNameBreed}>
                             {breeds[0].name}
