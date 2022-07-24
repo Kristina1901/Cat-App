@@ -76,7 +76,7 @@ const customStylesGrids = {
     color: '#8c8c8c',
     position: 'relative',
     top: '25%',
-    right: '-10%',
+    right: '-5%',
   }),
 };
 
