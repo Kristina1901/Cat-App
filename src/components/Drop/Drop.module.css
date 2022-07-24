@@ -1,11 +1,3 @@
-/* .formFileUpload {
-  height: 16rem;
-  width: 28rem;
-  max-width: 100%;
-  text-align: center;
-  position: relative;
-} */
-
 .inputFileUpload {
   display: none;
 }
@@ -110,6 +102,10 @@
   padding-bottom: 12px;
   padding-right: 30px;
   padding-left: 30px;
+}
+.upload:hover {
+  background: #fbe0dc;
+  color: #ff868e;
 }
 .containerPhotoInfo {
   margin-top: 20px;
