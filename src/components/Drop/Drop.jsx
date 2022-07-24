@@ -176,7 +176,10 @@ function Drop() {
               Image File Name: <span>{photo.name}</span>
             </span>
             {button !== true && (
-              <button className={s.upload} onClick={() => setLoading(true)}>
+              <button
+                className={loading === true ? s.uploadLoading : s.upload}
+                onClick={() => setLoading(true)}
+              >
                 {loading === true && <div className={s.loader}></div>}
                 {loading === true ? 'Uploading' : 'Upload Photo'}
               </button>

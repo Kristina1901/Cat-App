@@ -107,6 +107,24 @@
   background: #fbe0dc;
   color: #ff868e;
 }
+.uploadLoading {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #ff868e;
+  border-radius: 10px;
+  border: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 30px;
+  padding-left: 30px;
+}
 .containerPhotoInfo {
   margin-top: 20px;
   display: flex;
