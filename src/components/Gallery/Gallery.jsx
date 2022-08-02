@@ -47,7 +47,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(null);
   const [pending, setPending] = useState(false);
-  const [cat, setCat] = useState(false);
+  const [cat, setCat] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -57,7 +57,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       typeImg === '' &&
       breedId === '' &&
       orderValue === 'Random' &&
-      update === null && cat === false
+      update === null && cat === null
     ) {
       setPending(true);
       getCatsBreeds().then(data => setListBreeds(data));
@@ -70,6 +70,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         });
       setConditionButton(false);
       setUpdate(false);
+      setCat(false)
       
     }
     
@@ -90,6 +91,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         });
       setConditionButton(false);
       setUpdate(false);
+      setCat(false)
       
       
     }
