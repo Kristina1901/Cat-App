@@ -91,7 +91,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         });
       setConditionButton(false);
       setUpdate(false);
-      setCat(false)
+     
       
       
     }
@@ -101,7 +101,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         breedId !== '' ||
         orderValue !== 'Random') &&
       page === 0 &&
-      update === false && cat === false
+      update === false && cat !== null
     ) {
       setPending(true);
        getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
