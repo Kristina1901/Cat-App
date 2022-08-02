@@ -116,7 +116,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
     }
     if (
       (!typeImg || !breedId || !orderValue || !selectedBreedsQuantity) &&
-      page !== 0
+      page !== 0 
     ) {
       setPending(true);
       getCatsGallery(
