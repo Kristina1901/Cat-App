@@ -70,6 +70,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         });
       setConditionButton(false);
       setUpdate(false);
+      
     }
     
     if (
@@ -81,9 +82,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       update === false && cat === true
     ) {
       setPending(true);
-      getCatsBreeds().then(data => setListBreeds(data));
-
-      getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
+       getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
         .then(data => getFlatArray(data))
         .then(data => {
           setListBreedsDefaultClean(data);
@@ -92,6 +91,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       setConditionButton(false);
       setUpdate(false);
       
+      
     }
     if (
       (selectedBreedsQuantity !== 5 ||
@@ -99,12 +99,10 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         breedId !== '' ||
         orderValue !== 'Random') &&
       page === 0 &&
-      update === false
+      update === false && cat === false
     ) {
       setPending(true);
-      getCatsBreeds().then(data => setListBreeds(data));
-
-      getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
+       getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
         .then(data => getFlatArray(data))
         .then(data => {
           setListBreedsDefaultClean(data);
@@ -112,6 +110,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         });
       setConditionButton(false);
       setCat(true)
+      
     }
     if (
       (!typeImg || !breedId || !orderValue || !selectedBreedsQuantity) &&
