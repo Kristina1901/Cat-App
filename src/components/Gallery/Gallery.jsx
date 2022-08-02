@@ -47,6 +47,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(null);
   const [pending, setPending] = useState(false);
+  const [cat, setCat] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -56,7 +57,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       typeImg === '' &&
       breedId === '' &&
       orderValue === 'Random' &&
-      update === null
+      update === null && cat === false
     ) {
       setPending(true);
       getCatsBreeds().then(data => setListBreeds(data));
@@ -69,6 +70,28 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         });
       setConditionButton(false);
       setUpdate(false);
+    }
+    
+    if (
+      page === 0 &&
+      selectedBreedsQuantity === 5 &&
+      typeImg === '' &&
+      breedId === '' &&
+      orderValue === 'Random' &&
+      update === false && cat === true
+    ) {
+      setPending(true);
+      getCatsBreeds().then(data => setListBreeds(data));
+
+      getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
+        .then(data => getFlatArray(data))
+        .then(data => {
+          setListBreedsDefaultClean(data);
+          setPending(false);
+        });
+      setConditionButton(false);
+      setUpdate(false);
+      
     }
     if (
       (selectedBreedsQuantity !== 5 ||
@@ -88,6 +111,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
           setPending(false);
         });
       setConditionButton(false);
+      setCat(true)
     }
     if (
       (!typeImg || !breedId || !orderValue || !selectedBreedsQuantity) &&
@@ -247,6 +271,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
     breedId,
     typeImg,
     update,
+    cat
   ]);
   const onGoBack = () => {
     navigate(location?.state?.from ?? '/');
