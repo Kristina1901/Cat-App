@@ -93,16 +93,16 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         });
       setConditionButton(false);
       setUpdate(false);
-     
+      
       
     }
-    if (
-      (selectedBreedsQuantity !== 5 ||
+    if 
+      ((selectedBreedsQuantity !== 5 ||
         typeImg !== '' ||
-        breedId !== '' ||
-        orderValue !== 'Random') &&
-      page === 0 &&
-      update === false && cat !== null
+        breedId !== '' )
+         &&
+      page === 0 
+       && update === false && cat === false
     ) {
       setPending(true);
        getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
@@ -119,7 +119,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
     if (
       (!typeImg || !breedId || !orderValue || !selectedBreedsQuantity) &&
       page !== 0 &&
-       cat !== null
+       cat !== null && update === false
     ) {
       setPending(true);
       getCatsGallery(
@@ -165,9 +165,9 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         }
         setUpdate(false);
         setPending(false);
-        setOrderValue('Random');
+        setOrderValue('');
       });
-      console.log('Jenyad')
+     
     }
 
     if (update === true) {
