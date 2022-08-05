@@ -98,7 +98,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
     if 
       ((selectedBreedsQuantity !== 5 ||
         typeImg !== '' ||
-        breedId !== '' || (orderValue !== 'Random' && orderValue !== ''))
+        breedId !== '' )
          &&
       page === 0 
        && update === false && cat === false
