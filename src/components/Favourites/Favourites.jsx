@@ -79,7 +79,7 @@ const Favourites = ({ favourites, changeQuery }) => {
                     <img src={breeds} alt="breeds" width="117px" />
                   </div>
                   <Link
-                    to={'#'}
+                    to={'../breeds'}
                     state={{ from: location }}
                     className={styles.link}
                   >
