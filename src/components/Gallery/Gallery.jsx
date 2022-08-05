@@ -71,7 +71,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       setConditionButton(false);
       setUpdate(false);
       setCat(false)
-      console.log('Hi')
+     
       
       
     }
@@ -94,13 +94,15 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       setConditionButton(false);
       setUpdate(false);
      
-      console.log('Kris')
+      
     }
-    if ((selectedBreedsQuantity !== 5 && page === 0) &&
-       (!typeImg ||
-        !breedId ||
-        !orderValue) &&
-       (update === false && cat !== null)
+    if (
+      (selectedBreedsQuantity !== 5 ||
+        typeImg !== '' ||
+        breedId !== '' ||
+        orderValue !== 'Random') &&
+      page === 0 &&
+      update === false && cat !== null
     ) {
       setPending(true);
        getCatsGallery(selectedBreedsQuantity, typeImg, orderValue, page, breedId)
@@ -111,11 +113,13 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         });
       setConditionButton(false);
       setCat(true)
-      console.log('Papa')
+      
     }
+      
     if (
       (!typeImg || !breedId || !orderValue || !selectedBreedsQuantity) &&
-      page !== 0 
+      page !== 0 &&
+       cat !== null
     ) {
       setPending(true);
       getCatsGallery(
@@ -137,7 +141,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
         }
         setPending(false);
       });
-      console.log('Mama')
+    
       
     }
     
@@ -169,7 +173,91 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
     if (update === true) {
       setOrderValue('');
     }
-    
+    if (
+      selectedBreedsQuantity === 10 &&
+      page === 0 &&
+      deletedPage === true &&
+      orderValue !== 'Random'
+
+    ) {
+      setPending(true);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
+      Promise.all([arr1, arr2]).then(data => {
+        setListBreedsDefaultClean([...getFlatArray(data.flat())]);
+        setConditionButton(false);
+        setPending(false);
+      });
+
+    }
+    if (
+      selectedBreedsQuantity === 10 &&
+      page === 0 &&
+      deletedPage === false &&
+      orderValue !== 'Random'
+    ) {
+      setPending(true);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 0, breedId);
+      Promise.all([arr1, arr2]).then(data => {
+        setListBreedsDefaultClean([...getFlatArray(data.flat())]);
+        setConditionButton(false);
+        setPending(false);
+      });
+    }
+    if (
+      selectedBreedsQuantity === 15 &&
+      page === 0 &&
+      deletedPage === false &&
+      orderValue !== 'Random'
+    ) {
+      setPending(true);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
+      let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
+      Promise.all([arr1, arr2, arr3]).then(data => {
+        setListBreedsDefaultClean([...getFlatArray(data.flat())]);
+        setConditionButton(false);
+        setPending(false);
+      });
+    }
+
+
+    if (
+      selectedBreedsQuantity === 15 &&
+      page === 0 &&
+      deletedPage === true &&
+      orderValue !== 'Random'
+
+    ) {
+      setPending(true);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
+      let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
+      Promise.all([arr1, arr2, arr3]).then(data => {
+        setListBreedsDefaultClean([...getFlatArray(data.flat())]);
+        setConditionButton(false);
+        setPending(false);
+      });
+    }
+
+    if (
+      selectedBreedsQuantity === 20 &&
+      page === 0 &&  deletedPage === false &&
+      orderValue !== 'Random'
+
+    ) {
+      setPending(true);
+      let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
+      let arr2 = getCatsGallery(5, '', orderValue, 1, breedId);
+      let arr3 = getCatsGallery(5, '', orderValue, 2, breedId);
+      let arr4 = getCatsGallery(5, '', orderValue, 3, breedId);
+      Promise.all([arr1, arr2, arr3, arr4]).then(data => {
+        setListBreedsDefaultClean([...getFlatArray(data.flat())]);
+        setConditionButton(false);
+        setPending(false);
+      });
+    }
     
   }, [
     selectedBreedsQuantity,
