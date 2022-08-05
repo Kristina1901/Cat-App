@@ -72,8 +72,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       setUpdate(false);
       setCat(false)
      
-      
-      
+          
     }
     
     if (
@@ -99,7 +98,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
     if 
       ((selectedBreedsQuantity !== 5 ||
         typeImg !== '' ||
-        breedId !== '' )
+        breedId !== '' || (orderValue !== 'Random' && orderValue !== ''))
          &&
       page === 0 
        && update === false && cat === false
@@ -177,7 +176,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       selectedBreedsQuantity === 10 &&
       page === 0 &&
       deletedPage === true &&
-      orderValue !== 'Random'
+      (orderValue !== 'Random' || orderValue !== '')
 
     ) {
       setPending(true);
@@ -194,7 +193,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       selectedBreedsQuantity === 10 &&
       page === 0 &&
       deletedPage === false &&
-      orderValue !== 'Random'
+      (orderValue !== 'Random' || orderValue !== '')
     ) {
       setPending(true);
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
@@ -209,7 +208,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       selectedBreedsQuantity === 15 &&
       page === 0 &&
       deletedPage === false &&
-      orderValue !== 'Random'
+      (orderValue !== 'Random' || orderValue !== '')
     ) {
       setPending(true);
       let arr1 = getCatsGallery(5, '', orderValue, 0, breedId);
@@ -227,7 +226,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
       selectedBreedsQuantity === 15 &&
       page === 0 &&
       deletedPage === true &&
-      orderValue !== 'Random'
+      (orderValue !== 'Random' || orderValue !== '')
 
     ) {
       setPending(true);
@@ -244,7 +243,7 @@ const Gallery = ({ getGalleryFavourites, changeQuery }) => {
     if (
       selectedBreedsQuantity === 20 &&
       page === 0 &&  deletedPage === false &&
-      orderValue !== 'Random'
+      (orderValue !== 'Random' || orderValue !== '')
 
     ) {
       setPending(true);
